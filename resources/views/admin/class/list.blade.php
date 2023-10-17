@@ -1,14 +1,13 @@
 @extends('layouts.master')
 
 @section('title')
-
 @endsection
 @section('maintopic')
     Manager
 @endsection
 
 @section('homepage')
-   Class List
+    Class List
 @endsection
 
 @section('secondpage')
@@ -54,20 +53,28 @@
                                             {{-- {{(query1.data.offset.toNumber() + ($index + 1))}} --}}
                                             <th data-sortable="true" style="width: 7.320939334637966%;"><button
                                                     class="datatable-sorter">#</button></th>
-                                            <th data-sortable="true" style="width: 15.320939334637966%;"><button
+                                            <th data-sortable="true" style="width: 19.320939334637966%;"><button
                                                     class="datatable-sorter">Name</button></th>
-                                            <th data-sortable="true" style="width: 20.51859099804305%;"><button
+                                            <th data-sortable="true" style="width: 10.51859099804305%;"><button
                                                     class="datatable-sorter">Status</button></th>
                                             <th data-sortable="true" style="width: 10.76320939334638%;"><button
                                                     class="datatable-sorter">Created By</button></th>
-                                            <th data-sortable="true" style="width: 12.76320939334638%;"><button
+                                            <th data-sortable="true" style="width: 15.76320939334638%;"><button
                                                     class="datatable-sorter">Created Date</button></th>
                                             <th data-sortable="true" style="width: 19.960861056751465%;"><button
                                                     class="datatable-sorter">Action</button></th>
                                         </tr>
                                     </thead>
                                     <tbody>
-
+                                        @foreach ($getallrecord as $class)
+                                        <tr>
+                                            <td>{{ $class->id }}</td>
+                                            <td>{{ $class->name }}</td>
+                                            <td>{{ $class->status }}</td>
+                                            <td>{{ $class->created_by_name }}</td>
+                                            <td>{{ date('d-m-Y H:i A',strtotime($class->created_at)) }}</td>
+                                        </tr>
+                                        @endforeach
 
                                     </tbody>
                                 </table>
