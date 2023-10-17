@@ -15,16 +15,27 @@
 
             <li class="nav-item  ">
                 <div>
-                    <a  href="{{ url('admin/list') }}  " class="nav-link collapsed {{ request()->is('admin/alluser') ? 'active' : '' }}" >
+                    <a href="{{ url('admin/list') }}  "
+                        class="nav-link collapsed {{ request()->is('admin/alluser') ? 'active' : '' }}">
                         <i class="bi bi-people"></i>
 
                         <span>Admin</span>
                     </a>
                 </div>
 
+            </li>
+            <li class="nav-item  ">
+                <div>
+                    <a href="{{ url('admin/class/list') }}  "
+                        class="nav-link collapsed {{ request()->is('admin/class/list') ? 'active' : '' }}">
+                        <i class="bi bi-people"></i>
 
-            </li><!-- End admin Page Nav -->
-            <!-- End Dashboard Nav -->
+                        <span>Class</span>
+                    </a>
+                </div>
+
+            </li>
+
         @elseif(Auth::user()->user_type == 2)
             <li class="nav-item">
                 <a class="nav-link " href="{{ url('student/dashboard') }}">
