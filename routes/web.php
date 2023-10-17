@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ForgetPasswordController;
+use App\Http\Controllers\ClassController;
 
 
 /*
@@ -50,7 +51,10 @@ Route::group(['middleware' => 'admin'], function () {
     Route::post('admin/update/{id}', [AdminController::class, 'updateAdminPost'])->name('updateadmin');
     Route::get('admin/delete/{id}', [AdminController::class, 'adminDelete']);
     Route::post('admin/search',[AdminController::class, 'AdminSearch']);
-
+//class route
+    Route::get('admin/class/list', [ClassController::class, 'List']);
+    Route::get('admin/class/newclass', [ClassController::class, 'NewClass']);
+    Route::post('admin/class/insert',[ClassController::class, 'insertNewClass']);
 
 
 
