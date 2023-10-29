@@ -11,13 +11,24 @@ class ClassModel extends Model
     protected $table = "class";
     protected $fillable = ['name', 'status', 'created_by', 'created_at'];
 
+
+    //get singel record
+    static public function getSingleRecord($id)
+    {
+        return self::where('id', $id)->first();
+    }
+
     //static function get all Record
     static public function getAllRecord()
     {
         $return = ClassModel::select('class.*', 'users.name as created_by_name')
             ->join('users', 'users.id', 'class.created_by')
-            ->paginate(20);
-            return  $return;
+            ->paginate(10);
+        return $return;
+    }
+    static public function searchAllRecord($name)
+    {
+       
     }
 
 } //end class

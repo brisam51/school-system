@@ -110,9 +110,10 @@
                                 </table>
                             </div>
                             <div class="datatable-bottom">
-                                <div class="datatable-info"> {{ $alluser->onEachSide(1)->links() }}</div>
+
                                 <nav class="datatable-pagination">
                                     <ul class="datatable-pagination-list">
+                                        <div class="datatable-info"> {{ $alluser->onEachSide(1)->links() }}</div>
 
                                     </ul>
                                 </nav>

@@ -28,13 +28,26 @@
                 <div>
                     <a href="{{ url('admin/class/list') }}  "
                         class="nav-link collapsed {{ request()->is('admin/class/list') ? 'active' : '' }}">
-                        <i class="bi bi-people"></i>
+                        <i class="bi bi-tag"></i>
 
                         <span>Class</span>
                     </a>
                 </div>
 
             </li>
+            {{-- subject section start --}}
+            <li class="nav-item  ">
+                <div>
+                    <a href="{{ url('admin/subject/list') }}  "
+                        class="nav-link collapsed {{ request()->is('admin/subject/list') ? 'active' : '' }}">
+                        <i class="bi bi-book"></i>
+
+                        <span>Subject</span>
+                    </a>
+                </div>
+
+            </li>
+             {{-- subject section end --}}
 
         @elseif(Auth::user()->user_type == 2)
             <li class="nav-item">
