@@ -15,7 +15,7 @@ class AdminController extends Controller
     //for display all all admins
     public function adminList()
     {
-        $alluser = User::paginate(3);
+        $alluser = User::paginate(10);
 
         $data = 'Admin List';
         return view('admin.all_user', ['data' => $data], compact('alluser'));

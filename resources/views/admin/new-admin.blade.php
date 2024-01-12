@@ -31,11 +31,11 @@
                   </ul>
 
                 </div>
-                  
+
                 @endif
                 @if (session()->has('success'))
                 <div class="alert alert-secondary" role="alert">{{ session('success') }}</div>
-                    
+
                 @endif
             </div>
             <div class="card ">
@@ -43,7 +43,7 @@
                     <div class="card-title text-center text-white bg-primary"  >
                         <h5 >Add New Admin</h5>
                     </div>
-                   
+
 
                     <!-- Horizontal Form -->
                     <form action="{{ url('admin/insert') }}" method="post">
@@ -60,11 +60,23 @@
                                 <input type="email" name="email" class="form-control" id="email" required>
                             </div>
                         </div>
-                        <div class="row mb-3">
+                        {{-- <div class="row mb-3">
                             <label for="inputEmail3" class="col-sm-2 col-form-label">Role:</label>
                             <div class="col-sm-10">
                                 <input type="text" name="user_type" class="form-control" id="user_type" required>
                                 <p>1=admin,2=Student , 3=Teacher , 4=Parent</p>
+                            </div>
+                        </div> --}}
+                        <div class="row mb-3">
+                            <label for="inputEmail3" class="col-sm-2 col-form-label">User Type:</label>
+                            <div class="col-sm-10">
+                               <select name="user_type" id="user_type" class="form-control">
+                                <option value="">Select User Type</option>
+                                <option value="1">Admin</option>
+                                <option value="2">Student</option>
+                                <option value="3">Teacher</option>
+                                <option value="4">Parent</option>
+                               </select>
                             </div>
                         </div>
                         <div class="row mb-3">

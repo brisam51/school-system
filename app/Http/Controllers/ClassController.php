@@ -64,7 +64,7 @@ class ClassController extends Controller
         $update = ClassModel::find($request->id);
 
         $ruls = [
-            'name' => 'required|min:3|unique:class',
+            'name' => 'required|min:3|unique:class,name,'.$update->id,
 
         ];
         $message = [

@@ -75,10 +75,10 @@
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $class->name }}</td>
                                             <td>
-                                                @if ($class->status == 1)
-                                                    Inactiv
-                                                @else
+                                                @if ($class->status == 0)
                                                     Active
+                                                @else
+                                                    Inactive
                                                 @endif
 
                                             </td>
