@@ -149,37 +149,58 @@ class ParentController extends Controller
                 $request->validate($ruls, $messages);
                 // $parent
 
-                $image_path ='asstes/img/profile/parents/' . $parent->profile_pic;
+                $image_path = 'asstes/img/profile/parents/' . $parent->profile_pic;
 
-                if(File::exists($image_path)){
+                if (File::exists($image_path)) {
                     File::deleteDirectory($image_path);
                 }
                 $parent->profile_pic = $newImage;
             }
 
 
-                $parent->save();
-                return redirect()->route('admin.parent.list')->with('success', 'parent information updeted succefully');
-            } else {
-                return back()->withErrors('errors')->withInput();
-            }
-
-
+            $parent->save();
+            return redirect()->route('admin.parent.list')->with('success', 'parent information updeted succefully');
+        } else {
+            return back()->withErrors('errors')->withInput();
         }
-public function Delete($id){
 
 
-    $parent=User::find($id);
-    if(!empty($parent->profile_pic)){
-        $image_path ='asstes/img/profile/parents/' . $parent->profile_pic;
-        if(File::exists($image_path)){
-            File::delete(public_path(). $image_path);
-        }
     }
 
+    // ------------------create Delete Functin---------------------
+    public function Delete($id)
+    {
+        $parent = User::find($id);
+        if (!empty($parent->profile_pic)) {
+            $image_path = 'asstes/img/profile/parents/' . $parent->profile_pic;
+            if (File::exists($image_path)) {
+                File::delete(public_path() . $image_path);
+            }
+        }
 
-    $parent->delete();
-   return back()->with('success','Iformation of:('.$parent->name .')deleted successfully');
+
+        $parent->delete();
+        return back()->with('success', 'Iformation of:(' . $parent->name . ')deleted successfully');
+    }
+
+    //  ---------------------create search functin--------------------
+
+    public function Search(Request $request)
+    {
+        $data["header_title"] = "Search List";
+        $data["getParent"] = User::select("users.*")
+            ->where("user_type", "=", 4);
+        if (!empty($request->name)) {
+            $data["getParent"] = $data["getParent"]->where("users.name", "like", "%" . $request->name . "%")->paginate(10);
+        } elseif (!empty($request->last_name)) {
+            $data["getParent"] = $data["getParent"]->where("users.last_name", "like", "%" . $request->last_name . "%")->paginate(10);
+        }
+
+        return view('admin.parent.list',$data);
+    }
+//-----------------create function for asginment student to parent-----------------
+public function MyStudent($id){
+
+    return view("admin.parent.mystudent");
 }
-
 } //end class

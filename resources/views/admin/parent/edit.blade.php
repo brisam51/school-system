@@ -53,13 +53,13 @@
                                     <div class="col-sm-12">
                                         <select class="form-control" name="gender" id="gender">
                                             <option value="">Select Gender</option>
-                                            {{-- <option {{ old('name') == $key ? "selected" : "" }} value="{{ $value }}"> --}}
-                                            <option {{ (old('gender', $getParent->gender)==1)? "selected" : "" }}
+
+                                            <option {{ (old('gender', $getParent->gender)=='Male')? "selected" : "" }}
                                                 value="Male">Male</option>
-                                            <option {{ (old('gender', $getParent->gender)==2)? "selected" : "" }}
+                                            <option {{ (old('gender', $getParent->gender)=="Femal")? "selected" : "" }}
                                                 value="Famle">FeMale
                                             </option>
-                                            <option {{ (old('gender', $getParent->gender)==0) ? "selected" : "" }}
+                                            <option {{ (old('gender', $getParent->gender)=='other') ? "selected" : "" }}
                                                 value="other">other
                                             </option>
                                         </select>

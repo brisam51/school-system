@@ -74,6 +74,8 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('admin/parent/edit/{id}', [ParentController::class, 'Edit'])->name('admin.parent.edit');
     Route::post('admin/parent/update/{id}', [ParentController::class, 'Update'])->name('admin.parent.update');
     Route::get('admin/parent/delete/{id}', [ParentController::class, 'Delete'])->name('admin.parent.delete');
+    Route::get('admin/parent/search', [ParentController::class, 'Search'])->name('admin.parent.search');
+    Route::get('admin/parent/mystudent/{id}', [ParentController::class, 'MyStudent'])->name('admin.parent.mystudent');
 
 
     //Class route

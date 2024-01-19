@@ -33,11 +33,11 @@
                     <form class="row g-3" action="{{ route('admin.parent.search') }}" method="GET">
                         <div class="col-auto">
                             <label for="inputPassword2" >First Name</label>
-                            <input type="text" name="name" class="form-control" value="{{ Request::get('name') }}"  id="inputPassword2" placeholder="">
+                            <input type="text" name="name" class="form-control" value="{{ Request::get('name') }}"  id="inputPassword2" placeholder="Firs tName">
                         </div>
                         <div class="col-auto">
                           <label for="inputPassword2" >Last Name</label>
-                          <input type="text" name="last_name" class="form-control" value="{{ Request::get('Last_name') }}" id="inputPassword2" placeholder="">
+                          <input type="text" name="last_name" class="form-control" value="{{ Request::get('Last_name') }}" id="inputPassword2" placeholder="Last Name">
                         </div>
                         <div class="col-auto ">
 
@@ -147,7 +147,8 @@
                                                         class="btn btn-sm btn-success ">Edit</a>
                                                     <a href="{{ route('admin.parent.delete', $parent->id) }}"
                                                         class="btn btn-sm btn-danger">Delete</a>
-
+                                                        <a href="{{ route('admin.parent.mystudent', $parent->id) }}"
+                                                            class="btn btn-sm btn-success">Delete</a>
 
                                                 </td>
                                             </tr>

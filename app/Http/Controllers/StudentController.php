@@ -236,6 +236,7 @@ class StudentController extends Controller
 
     public function search_student(Request $request)
     {
+       
         if (!empty($request)) {
             $getStudent = User::select('users.*', 'class.name as class_name')
                 ->join('class', 'users.class_id', '=', 'class.id', 'left')
