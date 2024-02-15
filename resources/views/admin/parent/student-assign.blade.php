@@ -3,7 +3,7 @@
 @section('title')
 @endsection
 @section('maintopic')
-    {{ $header_title }}
+   Parents List
 @endsection
 
 @section('homepage')
@@ -17,12 +17,12 @@
         <div class="row">
             <div class="col-lg-12">
                 @if (session()->has('success'))
-                    <div class="alert alert-success" role="alert">{{ session('success') }}</div>
+                    <div class="alert alert-secondary" role="alert">{{ session('success') }}</div>
                 @endif
                 {{-- start search section --}}
                 <div class="col">
                     <div style="text-align: right">
-                        <a href="{{ url('admin/student/add') }}" class="btn btn-primary">Add new Student</a>
+                        <a href="{{ route('admin.parent.add') }}" class="btn btn-primary">Add new parent</a>
                     </div>
                 </div>
 
@@ -30,19 +30,19 @@
 
                 <div class="col mb-2">
 
-                    <form class="row g-3" action="{{ route('admin.student.search') }}" method="GET">
+                    <form class="row g-3" action="{{ route('admin.parent.search') }}" method="GET">
                         <div class="col-auto">
                             <label for="inputPassword2" >First Name</label>
-                            <input type="text" name="name" class="form-control" value="{{ Request::get('name') }}"  id="inputPassword2" placeholder="">
+                            <input type="text" name="name" class="form-control" value="{{ Request::get('name') }}"  id="inputPassword2" placeholder="Firs tName">
                         </div>
                         <div class="col-auto">
                           <label for="inputPassword2" >Last Name</label>
-                          <input type="text" name="last_name" class="form-control" value="{{ Request::get('Last_name') }}" id="inputPassword2" placeholder="">
+                          <input type="text" name="last_name" class="form-control" value="{{ Request::get('Last_name') }}" id="inputPassword2" placeholder="Last Name">
                         </div>
                         <div class="col-auto ">
 
                           <button type="submit" class="btn btn-primary mt-4">Search</button>
-                          <a href="{{ route('admin.student.list') }}" class="btn btn-danger mt-4">Reste</a>
+                          <a href="{{ route('admin.parent.list') }}" class="btn btn-danger mt-4">Reste</a>
                         </div>
                       </form>
                 </div>
@@ -80,22 +80,11 @@
                                             <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
                                                 colspan="1" aria-label="Browser: activate to sort column ascending">
                                                 Last Name</th>
-                                                <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
-                                                colspan="1" aria-label="Platform(s): activate to sort column ascending">
-                                                Parent First Nam
-                                            </th>
-                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
-                                                colspan="1" aria-label="Platform(s): activate to sort column ascending">
-                                                Parent Last Nam
-                                            </th>
                                             <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
                                                 colspan="1" aria-label="Platform(s): activate to sort column ascending">
                                                 email
                                             </th>
-                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
-                                                colspan="1" aria-label="Platform(s): activate to sort column ascending">
-                                                class Name
-                                            </th>
+
                                             <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
                                                 colspan="1" aria-label="Platform(s): activate to sort column ascending">
                                                 Mobile
@@ -105,41 +94,24 @@
                                                 colspan="1" aria-label="Platform(s): activate to sort column ascending">
                                                 Gender
                                             </th>
+
                                             <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
-                                                colspan="1" aria-label="Platform(s): activate to sort column ascending">
-                                                Date of
-                                                Brith
-                                            </th>
-                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
-                                                colspan="1"
-                                                aria-label="Platform(s): activate to sort column ascending">
-                                                Caste
-                                            </th>
+                                            colspan="1"
+                                            aria-label="Platform(s): activate to sort column ascending">
+                                            status
+                                        </th>
+
                                             <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
                                                 colspan="1"
                                                 aria-label="Platform(s): activate to sort column ascending">
-                                                Religion
+                                                occupation
                                             </th>
+
+
                                             <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
                                                 colspan="1"
                                                 aria-label="Platform(s): activate to sort column ascending">
-                                                Admission
-                                                Date
-                                            </th>
-                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
-                                                colspan="1"
-                                                aria-label="Platform(s): activate to sort column ascending">
-                                                Height
-                                            </th>
-                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
-                                                colspan="1"
-                                                aria-label="Platform(s): activate to sort column ascending">
-                                                Wheight
-                                            </th>
-                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
-                                                colspan="1"
-                                                aria-label="Platform(s): activate to sort column ascending">
-                                                Blood Group
+                                               address
                                             </th>
 
                                             <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
@@ -151,43 +123,26 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($getStudent as $student)
+                                        @foreach ($search as $serch)
                                             <tr>
+
+
                                                 <td>{{ $loop->iteration }}</td>
-                                                <td>
-                                                    <img style="width: 70px; border-radius:40px"
-                                                        src="{{ asset('public/images/students/' . $student->profile_pic) }}"
-                                                        alt="#">
-                                                    </td>
-                                                <td>{{ $student->name }}</td>
-                                                <td>{{ $student->last_name }}</td>
-                                                                                           <td>{{ $student->parent_name }}</td>
-                                                <td>{{ $student->parent_last_name }}</td>
-                                                <td>{{ $student->email }}</td>
-                                                <td>{{ $student->class_name }}</td>
-                                                <td>{{ $student->mobile_number }}</td>
-                                                <td>{{ $student->gender }}</td>
-                                                <td style="min-width: 120px;">{{ $student->date_of_brith }}</td>
-                                                <td>{{ $student->caste }}</td>
+                                                <td><img style="width: 70px; border-radius:40px"
+                                                        src="{{ asset('public/asstes/img/profile/parents/' . $serch->profile_pic) }}"
+                                                        alt="#"></td>
+                                                <td>{{ $serch->name }}</td>
+                                                <td>{{ $serch->last_name }}</td>
 
-                                                <td>{{ $student->religion }}</td>
-                                                <td style="min-width: 120px;">{{ $student->admission_date }}</td>
-                                                <td>{{ $student->height }}</td>
-                                                <td>{{ $student->weight }}</td>
-                                                <td>{{ $student->blood_group }}</td>
 
-                                                <td style="min-width: 150px;">
 
-                                                    <a href="{{ route('admin.student.edit', $student->id) }}"
-                                                        class="btn btn-sm btn-success ">Edit</a>
-                                                    <a href="{{ route('admin.student.delete', $student->id) }}"
-                                                        class="btn btn-sm btn-danger">Delete</a>
+                                                <td style="min-width: 220px;">
+
 
 
                                                 </td>
                                             </tr>
                                         @endforeach
-
                                     </tbody>
 
                                 </table>

@@ -250,7 +250,7 @@
                         </div>
 
                         <div>
-                            <img  style="width: 70px; border-radius:40px;" src="{{ asset('public/assets/img/profile/'. $getstudent->profile_pic) }}" alt="#">
+                            <img  style="width: 70px; border-radius:40px;" src="{{ asset('public/images/students/'. $getstudent->profile_pic) }}" alt="#">
                         </div>
                     </div>
 

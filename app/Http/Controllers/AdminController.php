@@ -18,12 +18,12 @@ class AdminController extends Controller
         $alluser = User::paginate(10);
 
         $data = 'Admin List';
-        return view('admin.all_user', ['data' => $data], compact('alluser'));
+        return view('admin.admin.all_user', ['data' => $data], compact('alluser'));
     }
     //nvoke new admin page
     public function newAdmin()
     {
-        return view('admin.new-admin');
+        return view('admin.admin.new-admin');
     }
     //insert admin information
     public function insertNewAdmin(Request $request)
@@ -32,8 +32,6 @@ class AdminController extends Controller
         $ruls = [
             'name' => 'required|string|min:3',
             'email' => 'email|unique:users',
-
-
         ];
         $message = [
             'name.required' => 'you must insert admin Name',
@@ -52,6 +50,7 @@ class AdminController extends Controller
             $user->user_type = $request->user_type;
             $user->created_at = Carbon::now();
             $user->save();
+            //list
             return redirect('admin/list')->with('success', ' New Admin Added To Admin list');
         } else {
             return back()->withErrors('errors');
@@ -63,7 +62,7 @@ class AdminController extends Controller
         $updateAdmin = User::where('id', $id)->first();
 
 
-        return view('admin.admin-update', ['updateAdmin' => $updateAdmin]);
+        return view('admin.admin.admin-update', ['updateAdmin' => $updateAdmin]);
 
     }
     //insert new admin info
@@ -98,6 +97,7 @@ class AdminController extends Controller
 
             $user->updated_at = Carbon::now();
             $user->save();
+            //list
             return redirect('admin/list')->with('success', ' nformation abute: ' . $name . '  updated successfully');
         } else {
             return back()->withErrors('errors');
@@ -111,7 +111,7 @@ class AdminController extends Controller
         $user = User::where('id', $id)->first();
         $name = $user->name;
         $user->delete();
-
+//list
         return redirect('admin/list')->with('success', 'user witn name:' . $name . 'deleted');
     }
 
@@ -123,7 +123,7 @@ class AdminController extends Controller
             $alluser=json_decode($result,true);
             $number=count( $alluser);
 
-            return view('admin.search_page',['alluser'=> $alluser ,'numder'=> $number]);
+            return view('admin.admin.search_page',['alluser'=> $alluser ,'numder'=> $number]);
 
 
         }

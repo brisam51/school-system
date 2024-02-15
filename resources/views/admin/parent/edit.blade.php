@@ -131,6 +131,7 @@
                                         <div style="color: red">{{ $errors->first('occupation') }}</div>
                                     </div>
                                 </div>
+                                
                                 <div class="row mb-2">
                                     <label for="inputEmail3" class="col-sm-4 col-form-label">Profile Picure</label>
                                     <div class="col-sm-12">

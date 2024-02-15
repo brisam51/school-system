@@ -134,29 +134,17 @@ class ParentController extends Controller
             $parent->address = $request->address;
 
             if ($request->hasFile('profile_pic')) {
-                //     $fileNameExt = $request->file('profile_pic')->getClientOriginalName();
-                // $fileName = pathinfo($fileNameExt, PATHINFO_FILENAME);
-                // $fileExt = $request->file('profile_pic')->getClientOriginalExtension();
-                // $fileNameToStore = $fileName.'_'.time().'.'.$fileExt;
-                // $pathToStore = $request->file('profile_pic')->storeAs('public/images',$fileNameToStore);
-                //    $parent->profile_pic =$pathToStore;
-                // $request->validate($ruls, $message);
-                // $newImagename = time() . '-' . $request->name . '.' . $request->profile_pic->extension();
-                // $request->profile_pic->move(public_path('assets/img/profile'), $newImagename);
 
+                $dest=public_path('images/parents/'.$parent->profile_pic);
+
+                if(file_exists($dest)){
+                    unlink($dest);
+                }
                 $newImage = time() . '-' . $parent->name . '.' . $request->profile_pic->extension();
                 $request->profile_pic->move(public_path('asstes/img/profile/parents'), $newImage);
                 $request->validate($ruls, $messages);
-                // $parent
-
-                $image_path = 'asstes/img/profile/parents/' . $parent->profile_pic;
-
-                if (File::exists($image_path)) {
-                    File::deleteDirectory($image_path);
-                }
-                $parent->profile_pic = $newImage;
+               $parent->profile_pic = $newImage;
             }
-
 
             $parent->save();
             return redirect()->route('admin.parent.list')->with('success', 'parent information updeted succefully');
@@ -171,12 +159,11 @@ class ParentController extends Controller
     public function Delete($id)
     {
         $parent = User::find($id);
-        if (!empty($parent->profile_pic)) {
-            $image_path = 'asstes/img/profile/parents/' . $parent->profile_pic;
-            if (File::exists($image_path)) {
-                File::delete(public_path() . $image_path);
-            }
-        }
+
+        $dest=public_path('images/parents/'.$parent->profile_pic);
+                if(file_exists($dest)){
+                    unlink($dest);
+                }
 
 
         $parent->delete();
@@ -196,11 +183,39 @@ class ParentController extends Controller
             $data["getParent"] = $data["getParent"]->where("users.last_name", "like", "%" . $request->last_name . "%")->paginate(10);
         }
 
-        return view('admin.parent.list',$data);
+        return view('admin.parent.list', $data);
     }
-//-----------------create function for asginment student to parent-----------------
-public function MyStudent($id){
+    //-----------------create function for asginment student to parent-----------------
+    public function myStudent($id)
+    {
 
-    return view("admin.parent.mystudent");
-}
+        $data["getparent"] = User::getSingle($id);
+        $data['parent_id'] = $id;
+        $data["getSearchStudent"] = User::getSearchStudent();
+        $data["getRecord"] = User::getMyStudent($id);
+
+               $data["header_title"] = "parent Student List";
+        return view("admin.parent.my-student", $data);
+    }
+
+    public function AssignStudentParent($student_id, $parent_id)
+    {
+        $student = User::getSingle($student_id);
+        $student->parent_id = $parent_id;
+        $student->save();
+        return redirect()->back()->with('success', 'Student Successfully Assigned');
+    }
+
+
+
+    //for delete assigned student to the parents
+    public function AssignStudentParentDelete($student_id)
+    {
+        $student = User::getSingle($student_id);
+        $student->parent_id = null;
+        $student->save();
+        return redirect()->back()->with('success', 'Student Successfully Assigned Deleted');
+
+    }
+
 } //end class

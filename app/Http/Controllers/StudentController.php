@@ -9,7 +9,7 @@ use App\Models\User;
 use Hash;
 use Auth;
 use Str;
-use File;
+use Illuminate\Support\Facades\File;
 
 class StudentController extends Controller
 {
@@ -108,7 +108,7 @@ class StudentController extends Controller
             if ($request->hasFile('profile_pic')) {
 
                 $newImagename = time() . '-' . $request->name . '.' . $request->profile_pic->extension();
-                $request->profile_pic->move(public_path('asstes/img/profile'), $newImagename);
+                $request->profile_pic->move(public_path('images/students/'), $newImagename);
                 $student->profile_pic = $newImagename;
             }
 
@@ -211,8 +211,15 @@ class StudentController extends Controller
             $user->blood_group = $request->blood_group;
             $user->user_type = 2;
             if ($request->hasFile('profile_pic')) {
+
+                $destantion=public_path('images/students/'.$user->profile_pic);
+
+                if(file_exists($destantion)){
+                   unlink( $destantion);
+                }
+
                 $newImagename = time() . '-' . $request->name . '.' . $request->profile_pic->extension();
-                $request->profile_pic->move(public_path('asstes/img/profile'), $newImagename);
+                $request->profile_pic->move(public_path('images/students/'), $newImagename);
 
                 $user->profile_pic = $newImagename;
             }
@@ -229,6 +236,12 @@ class StudentController extends Controller
     public function Delete($id)
     {
         $delete_student = User::getSingle($id);
+
+        $destantion=public_path('images/students/'. $delete_student->profile_pic);
+
+        if(file_exists($destantion)){
+           unlink( $destantion);
+        }
         $delete_student->delete();
         return redirect()->back()->with(['success' => 'deleted successfully']);
 
@@ -236,7 +249,7 @@ class StudentController extends Controller
 
     public function search_student(Request $request)
     {
-       
+
         if (!empty($request)) {
             $getStudent = User::select('users.*', 'class.name as class_name')
                 ->join('class', 'users.class_id', '=', 'class.id', 'left')

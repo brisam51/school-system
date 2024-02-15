@@ -141,19 +141,18 @@
                                                 <td style="width:250px;">{{ $parent->address }}</td>
 
 
-                                                <td style="min-width: 150px;">
+                                                <td style="min-width: 230px;">
 
                                                     <a href="{{ route('admin.parent.edit', $parent->id) }}"
                                                         class="btn btn-sm btn-success ">Edit</a>
                                                     <a href="{{ route('admin.parent.delete', $parent->id) }}"
                                                         class="btn btn-sm btn-danger">Delete</a>
-                                                        <a href="{{ route('admin.parent.mystudent', $parent->id) }}"
-                                                            class="btn btn-sm btn-success">Delete</a>
+                                                        <a href="{{ url('admin/parent/my-student/'.$parent->id) }}"
+                                                            class="btn btn-sm btn-primary">My Student</a>
 
                                                 </td>
                                             </tr>
                                         @endforeach
-
                                     </tbody>
 
                                 </table>

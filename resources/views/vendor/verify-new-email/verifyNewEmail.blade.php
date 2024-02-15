@@ -3,7 +3,7 @@
 
 Please click the button below to verify your new email address.
 
-@component('mail::button', ['url' => $url])
+
 Verify New Email Address
 @endcomponent
 

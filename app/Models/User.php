@@ -43,6 +43,7 @@ class User extends Authenticatable
         'email',
         'Password',
         'blood_group',
+        'parent_id',
 
     ];
 
@@ -73,15 +74,21 @@ class User extends Authenticatable
         return $record;
     }
 
+
+
+
     static public function getStudent()
     {
 
-        $return = self::select('users.*', 'class.name as class_name')
+        $return = self::select('users.*', 'class.name as class_name', 'parent.name as parent_name', 'parent.last_name as parent_last_name')
+
             ->join('class', 'users.class_id', '=', 'class.id', 'left')
+            ->join('users as parent', 'parent.id', '=', 'users.parent_id', 'left')
             ->where('users.user_type', '=', 2)
             ->paginate(10);
         return $return;
     }
+
 
     public function getProfile()
     {
@@ -97,8 +104,9 @@ class User extends Authenticatable
     static public function getParents()
     {
         $return = self::select('users.*')
+
             ->where('user_type', '=', 4)
-            ->orderBy('id','desc')
+            ->orderBy('id', 'desc')
             ->paginate(10);
 
 
@@ -106,4 +114,58 @@ class User extends Authenticatable
 
 
     }
+
+    static public function getSearchStudent()
+    {
+        //dd(Request::all());
+        if (!empty(Request::get('id')) || !empty(Request::get('name')) || !empty(Request::get('last_name')) || !empty(Request::get('email'))) {
+            //, 'parent.name as parent_name'
+
+            $return = self::select('users.*', 'class.name as class_name', 'parent.name as parent_name')
+                ->join('class', 'users.class_id', '=', 'class.id', 'left')
+                ->join('users as parent', 'parent.id', '=', 'users.parent_id', 'left')
+                ->where('users.user_type', '=', 2);
+
+            if (!empty(Request::get('id'))) {
+                $return = $return->where('users.id', 'like', '%' . Request::get("id") . '%')->get();
+            }
+
+            if (!empty(Request::get('name'))) {
+                $return = $return->where('users.name', 'like', '%' . Request::get("name") . '%')->get();
+            }
+
+            if (!empty(Request::get('last_name'))) {
+                $return = $return->where('users.last_name', 'like', '%' . Request::get("last_name") . '%')->get();
+            }
+
+            if (!empty(Request::get('email'))) {
+                $return = $return->where('users.email', 'like', '%' . Request::get("email") . '%')->get();
+            }
+
+
+            return $return;
+        }
+    } //end function
+
+    static public function getMyStudent($parent_id)
+    {
+        $return = self::select('users.*', 'class.name as class_name', 'parent.name as parent_name')
+            ->join('class', 'users.class_id', '=', 'class.id', 'left')
+            ->join('users as parent', 'parent.id', '=', 'users.parent_id', 'left')
+            ->where('users.parent_id', '=', $parent_id)
+            ->where('users.user_type', '=', 2)
+            ->orderBy('users.id', 'desc')
+            ->get();
+
+        return $return;
+    }
+
+    //Show All Information about teachers
+    static public function getTeacher()
+    {
+        $return = self::select('users.*')
+            ->where('users.user_type', '=', 3)->get();
+        return $return;
+    }
+
 } //end class
