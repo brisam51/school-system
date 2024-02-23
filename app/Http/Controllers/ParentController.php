@@ -212,6 +212,7 @@ class ParentController extends Controller
     public function AssignStudentParentDelete($student_id)
     {
         $student = User::getSingle($student_id);
+        
         $student->parent_id = null;
         $student->save();
         return redirect()->back()->with('success', 'Student Successfully Assigned Deleted');

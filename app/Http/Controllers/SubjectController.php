@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\SubjectModel;
+use App\Models\ClassSubjectModel;
 use Illuminate\Http\Request;
+use App\Models\User;
 use Auth;
 
 class SubjectController extends Controller
@@ -64,11 +66,11 @@ class SubjectController extends Controller
     public function UpdateSubjectPost(Request $request, $id)
     {
         if (!empty($request)) {
-            $data = SubjectModel::where('id',$id)->first();
+            $data = SubjectModel::where('id', $id)->first();
             // $subject=new SubjectModel();
 
             $ruls = [
-                'name' => 'required|min:3|unique:subject,name,'.$data->id,
+                'name' => 'required|min:3|unique:subject,name,' . $data->id,
                 'type' => 'required',
                 'status' => 'required',
             ];
@@ -100,7 +102,6 @@ class SubjectController extends Controller
         return redirect()->back()->with('success', 'subject with name:  ' . $data->name . ' deleted successfully');
     }
     public function SubjectSearch(Request $request)
-
     {
         // select('class.*', 'users.name as created_by_name')
         // ->join('users', 'class.created_by', '=', 'users.id')
@@ -108,11 +109,37 @@ class SubjectController extends Controller
         // ->orderBy('class.id','desc')
         // ->paginate(10, ['*'], 'page', $request->page);
 
-        if(!empty($request)) {
-        $data = SubjectModel::select('subject.*','users.name as created_by_name')
-            ->join('users', 'subject.created_by', '=', 'users.id')
-            ->where('subject.name', 'like', '%' . $request->name . '%')->paginate(2);
-            return view('admin.subject.list', ['subject'=> $data]);
+        if (!empty($request)) {
+            $data = SubjectModel::select('subject.*', 'users.name as created_by_name')
+                ->join('users', 'subject.created_by', '=', 'users.id')
+                ->where('subject.name', 'like', '%' . $request->name . '%')->paginate(2);
+            return view('admin.subject.list', ['subject' => $data]);
+        }
     }
+
+    //show subject in student side
+    public function Mysubject()
+    {
+//dd(Auth::user()->class_id);
+        $data['subject'] = ClassSubjectModel::mySubject(Auth::user()->class_id);
+        $data['header_title'] = 'My Subjects List';
+        return view('student.my_subject',$data);
+    }
+//for show all subject of student in parent side.
+public function parent_student_subject($student_id){
+
+    $user=User::getSingle($student_id);
+    $data['getUser']=$user;
+    $data['subject'] = ClassSubjectModel::mySubject( $user->class_id);
+    $data['header_title'] = 'My Student Subjects List';
+    return view('parent.my_student_subject',$data);
 }
+
+
+
+
+
+
+
+
 } //end class

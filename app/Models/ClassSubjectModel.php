@@ -30,7 +30,7 @@ class ClassSubjectModel extends Model
         if (!empty(Request::get('date'))) {
             $return = $return->where('classsubject.created_at', 'like', '%' . Request::get('date') . '%');
         }
-        $return = $return->orderBy('subject.name', 'desc')
+        $return = $return->orderBy('class.name', 'desc')
             ->paginate(10);
         return $return;
     }
@@ -41,7 +41,7 @@ class ClassSubjectModel extends Model
     }
     static public function getSingel($id){
         return ClassSubjectModel::find($id);
-        
+
     }
 
 
@@ -52,6 +52,17 @@ return self::where('class_id','=', $class_id)->where('is_delete','=',0)->get();
 
 static public function deleteSubject($class_id){
     return ClassSubjectModel::where('class_id','=', $class_id)->delete();
+}
+
+static function mySubject($class_id){
+    return  self::select('class_subject.*', 'subject.name as subject_name','subject.type as subject_type','class.name as class_name')
+            ->join('class', 'class.id', '=', 'class_subject.class_id')
+            ->join('subject', 'subject.id', '=', 'class_subject.subject_id')
+            //->join('users', 'users.id', '=', 'class_subject.created_by')
+            ->where('class_subject.class_id','=',$class_id)
+            ->where('class_subject.status','=',0)
+            ->where('class_subject.is_delete','=',0)
+            ->get();
 }
 
 }//end class

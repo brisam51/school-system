@@ -131,15 +131,7 @@ class UserController extends Controller
             return view('parent.myaccount', $data);
         }
 
-
-
-
     }
-
-
-
-
-
 
     public function Teacher_Account_Update(Request $request)
     {
@@ -353,6 +345,10 @@ class UserController extends Controller
     }
 
 
-    //Route::get('student/account', [UserController::class,'myAccount_student']);
-
+    //parent my student view
+    public function my_student_parent(){
+        $data['getRecord']=User::getMyStudent(Auth::user()->id);
+        $data['header_title']='My student List';
+        return view('parent.my_student_parent',$data);
+    }
 } //end class

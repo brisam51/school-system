@@ -19,7 +19,8 @@
 <link href="{{ url('assets/vendor/quill/quill.bubble.css') }}" rel="stylesheet">
 <link href="{{ url('assets/vendor/remixicon/remixicon.css') }}" rel="stylesheet">
 <link href="{{ url('assets/vendor/simple-datatables/style.css') }}" rel="stylesheet">
-
+{{-- for multi-select box --}}
+<link  type="text/css" href="{{ url('assets/css/virtual-select.min.css') }}"  rel="stylesheet">
 <!-- Template Main CSS File -->
 <link href="{{ url('assets/css/style.css') }}" rel="stylesheet">
 @yield('css-file')

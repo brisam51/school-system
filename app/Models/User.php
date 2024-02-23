@@ -76,7 +76,7 @@ class User extends Authenticatable
 
 
 
-
+//get All student
     static public function getStudent()
     {
 
@@ -89,7 +89,7 @@ class User extends Authenticatable
         return $return;
     }
 
-
+//get profile information
     public function getProfile()
     {
         if (!empty($this->profile_pic) && file_exists('upload/profile/' . $this->profile_pic)) {
@@ -100,32 +100,23 @@ class User extends Authenticatable
     }
 
 
-
+//get all parent
     static public function getParents()
     {
         $return = self::select('users.*')
-
             ->where('user_type', '=', 4)
             ->orderBy('id', 'desc')
             ->paginate(10);
-
-
         return $return;
-
-
     }
-
+//get student by search
     static public function getSearchStudent()
     {
-        //dd(Request::all());
-        if (!empty(Request::get('id')) || !empty(Request::get('name')) || !empty(Request::get('last_name')) || !empty(Request::get('email'))) {
-            //, 'parent.name as parent_name'
-
-            $return = self::select('users.*', 'class.name as class_name', 'parent.name as parent_name')
+               if (!empty(Request::get('id')) || !empty(Request::get('name')) || !empty(Request::get('last_name')) || !empty(Request::get('email'))) {
+                       $return = self::select('users.*', 'class.name as class_name', 'parent.name as parent_name')
                 ->join('class', 'users.class_id', '=', 'class.id', 'left')
                 ->join('users as parent', 'parent.id', '=', 'users.parent_id', 'left')
                 ->where('users.user_type', '=', 2);
-
             if (!empty(Request::get('id'))) {
                 $return = $return->where('users.id', 'like', '%' . Request::get("id") . '%')->get();
             }
@@ -147,6 +138,7 @@ class User extends Authenticatable
         }
     } //end function
 
+    //get student for parent
     static public function getMyStudent($parent_id)
     {
         $return = self::select('users.*', 'class.name as class_name', 'parent.name as parent_name')
@@ -165,6 +157,16 @@ class User extends Authenticatable
     {
         $return = self::select('users.*')
             ->where('users.user_type', '=', 3)->get();
+        return $return;
+    }
+
+    //get teach for assigen new class to him
+    static public function getClassTeacher()
+    {
+        $return = self::select('users.*')
+            ->where('users.user_type', '=', 3)
+            ->orderBy('users.name','desc')
+            ->get();
         return $return;
     }
 

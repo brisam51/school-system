@@ -6,7 +6,7 @@
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 {{-- title place --}}
 
- 
+
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -31,7 +31,7 @@
 
   <!-- ======= Sidebar ======= -->
   @include('layouts.main-sidebar')
-  
+
   <!-- End Sidebar-->
 {{-- start main content --}}
 <main id="main" class="main" >
@@ -39,10 +39,11 @@
     <div class="pagetitle">
       <h1>@yield('maintopic')</h1>
       <nav>
-        <ol class="breadcrumb">
+        {{-- I make below change in 14021129 --}}
+        {{-- <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="">@yield('homepage')</a></li>
           <li class="breadcrumb-item active">@yield('secondpage')</li>
-        </ol>
+        </ol> --}}
       </nav>
     </div>
     <!-- End Page Title -->
@@ -51,14 +52,14 @@
 @yield('content')
    {{-- end content --}}
   </main>
- 
+
   {{-- end main content --}}
 
   <!-- ======= Footer ======= -->
-  @include('layouts.footer')
+  {{-- @include('layouts.footer') --}}
   <!-- End Footer -->
 
-  
+
 
   <!-- Vendor JS Files -->
   {{-- JavaScriptsLinks --}}

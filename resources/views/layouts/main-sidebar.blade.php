@@ -1,17 +1,18 @@
-<aside id="sidebar" class="sidebar  text-bg-secondary p-3" style="width: 17rem" >
+<aside id="sidebar" class="sidebar  text-bg-secondary p-3" style="width: 17rem">
 
     <ul class="sidebar-nav" id="sidebar-nav">
 
         @if (Auth::user()->user_type == 1)
-
             <li class="nav-item  ">
-                <a class="nav-link " href="{{ url('admin/dashboard') }}">
-                    <i class="bi bi-grid"></i>
+                <a class="nav-link {{ Route::is('admin.dashboard') ? 'text-white bg-primary rounded' : '' }}"
+                    href="{{ url('admin/dashboard') }}">
+                    <i class="bi bi-grid text-white"></i>
                     <span>Dashboard</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link  {{ (Route::is('admin.myaccount'))?'text-white bg-primary rounded': ''}}" href="{{ url('admin/account') }}">
+                <a class="nav-link  {{ Route::is('admin.myaccount') ? 'text-white bg-primary rounded' : '' }}"
+                    href="{{ url('admin/account') }}">
                     <i class="bi bi-grid"></i>
                     <span>My Account</span>
                 </a>
@@ -20,7 +21,7 @@
             <li class="nav-item  ">
                 <div>
                     <a href="{{ url('admin/list') }}  "
-                        class="nav-link  {{ (Route::is('admin.list'))?'text-white bg-primary rounded': ''}}">
+                        class="nav-link  {{ Route::is('admin.list') ? 'text-white bg-primary rounded' : '' }}">
                         <i class="bi bi-people"></i>
 
                         <span>Admin</span>
@@ -32,7 +33,7 @@
             <li class="nav-item {{ Request::routeIs('admin.student.list') ? 'active' : '' }} ">
                 <div>
                     <a href="{{ route('admin.student.list') }}  "
-                        class=" nav-link collapsed {{ (Route::is('admin.student.list'))?'text-white bg-primary rounded': ''}}">
+                        class=" nav-link collapsed {{ Route::is('admin.student.list') ? 'text-white bg-primary rounded' : '' }}">
                         <i class="bi bi-people"></i>
 
                         <span>Student</span>
@@ -42,8 +43,7 @@
             </li>
             <li class="nav-item  ">
                 <div>
-                    <a href="{{route('admin.teacher.list') }}  "
-                        class="nav-link collapsed ">
+                    <a href="{{ route('admin.teacher.list') }}  " class="nav-link collapsed ">
                         <i class="bi bi-people"></i>
 
                         <span>Teachers</span>
@@ -53,8 +53,7 @@
             </li>
             <li class="nav-item  ">
                 <div>
-                    <a href="{{route('admin.parent.list') }}  "
-                        class="nav-link collapsed ">
+                    <a href="{{ route('admin.parent.list') }}  " class="nav-link collapsed ">
                         <i class="bi bi-people"></i>
 
                         <span>Parents</span>
@@ -88,18 +87,25 @@
             </li>
             <li class="nav-item  ">
                 <div>
-                    <a class="nav-link collapsed" href="{{ url('admin/assign-subject/list') }}"
-                        >
+                    <a class="nav-link collapsed" href="{{ url('admin/assign-subject/list') }}">
                         <i class="bi bi-tag"></i>
 
-                        <span>Assign Subject</span>
+                        <span>Assign Subject To Class</span>
                     </a>
                 </div>
 
             </li>
-             {{-- subject section end --}}
-             {{-- start change password --}}
-             <li class="nav-item  ">
+            <li class="nav-item  ">
+                <div>
+                    <a class="nav-link collapsed {{ Route::is('assigen.class.list')?'text-white bg-primary ':'' }}" href="{{ url('admin/teacher/assigen_class_teacher/list') }}  ">
+                        <i class="bi bi-tag"></i>
+                        <span>Assigen Class To Teacher</span>
+
+                    </a>
+                </div>
+
+            </li>
+            <li class="nav-item  ">
                 <div>
                     <a class="nav-link collapsed" href="{{ url('admin/change_password') }}  ">
                         <i class="bi bi-tag"></i>
@@ -109,44 +115,48 @@
                 </div>
 
             </li>
-              {{-- start change password --}}
-
+            {{-- start change password --}}
         @elseif(Auth::user()->user_type == 2)
             <li class="nav-item">
-                <a class="nav-link " href="{{ url('student/dashboard') }}">
+                <a class="nav-link {{ Route::is('student.dashboard') ? 'text-white bg-primary rounded' : '' }}"
+                    href="{{ url('student/dashboard') }}">
                     <i class="bi bi-grid"></i>
                     <span>Dashboard</span>
                 </a>
             </li><!-- End Dashboard Nav -->
-
             <li class="nav-item">
-                <a class="nav-link  " href="{{ url('student/account') }}">
+                <a class="nav-link  {{ Route::is('student.my_subject') ? 'text-white bg-primary rounded' : '' }}"
+                    href="{{ route('student.my_subject') }}">
+                    <i class="bi bi-grid"></i>
+                    <span>My Subject</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {{ Route::is('student.account') ? 'text-white bg-primary rounded' : '' }} "
+                    href="{{ url('student/account') }}">
                     <i class="bi bi-grid"></i>
                     <span>My Account</span>
                 </a>
             </li>
             <li class="nav-item  ">
                 <div>
-                    <a  class="nav-link" href="{{ url('student/change_password')}}">
+                    <a class="nav-link" href="{{ url('student/change_password') }}">
                         <i class="bi bi-tag"></i>
                         <span>Change Password</span>
 
                     </a>
                 </div>
             </li>
-            <li class="nav-item">
-                <a class="nav-link  " href="{{ url('admin/dashboard') }}">
-                    <i class="bi bi-grid"></i>
-                    <span>Dashboard</span>
-                </a>
-            </li>
         @elseif(Auth::user()->user_type == 3)
             <li class="nav-item">
-                <a class="nav-link @if(Request::segment(3)=='dashboard') 'active' @endif" href="{{ url('teacher/dashboard') }}">
+                <a class="nav-link @if (Request::segment(3) == 'dashboard') 'active' @endif"
+                    href="{{ url('teacher/dashboard') }}">
                     <i class="bi bi-grid"></i>
                     <span>My Account</span>
                 </a>
             </li><!-- End Dashboard Nav -->
+
+
             <li class="nav-item">
                 <a class="nav-link  " href="{{ url('teacher/account') }}">
                     <i class="bi bi-grid"></i>
@@ -170,6 +180,14 @@
                     <span>Dashboard</span>
                 </a>
             </li><!-- End Dashboard Nav -->
+
+            <li class="nav-item">
+                <a class="nav-link {{ Route::is('parent.my_student_parent') ? 'text-white bg-primary rounded' : '' }}  "
+                    href="{{ route('parent.my_student_parent') }}">
+                    <i class="bi bi-grid"></i>
+                    <span>My Student</span>
+                </a>
+            </li>
             <li class="nav-item">
                 <a class="nav-link  " href="{{ url('parent/account') }}">
                     <i class="bi bi-grid"></i>
@@ -177,7 +195,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <div >
+                <div>
                     <a class="nav-link" href="{{ url('teacher/change_password') }}">
                         <i class="bi bi-tag"></i>
                         <span>Chang Password</span>
@@ -185,9 +203,6 @@
                     </a>
                 </div>
             </li>
-
-
-
         @endif
 
 

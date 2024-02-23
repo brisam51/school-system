@@ -61,7 +61,7 @@
                         </div>
                         {{-- start --}}
                         {{-- @if($profile_data->p_religion == $religion->religion_id) selected @endif --}}
-                       
+
                         {{-- end --}}
                         <div class="row mb-4">
                             <label for="inputEmail3" class="col-sm-2 col-form-label" style="width: 150px">Subject
@@ -75,7 +75,6 @@
                                     </label>
                                 </div>
                             @endforeach
-
 
 
 

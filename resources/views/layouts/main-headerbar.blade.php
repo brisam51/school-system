@@ -1,20 +1,9 @@
 <!-- ======= Header ======= -->
 <header id="header" class="header fixed-top d-flex align-items-center">
 
-    <div class="d-flex align-items-center justify-content-between">
-      <a href="index.html" class="logo d-flex align-items-center">
-        <img src="{{ url('assets/img/logo.png') }}" alt="">
-        <span class="d-none d-lg-block">School Management System</span>
-      </a>
-      <i class="bi bi-list toggle-sidebar-btn"></i>
-    </div><!-- End Logo -->
 
-    <div class="search-bar">
-      <form class="search-form d-flex align-items-center" method="POST" action="#">
-        <input type="text" name="query" placeholder="Search" title="Enter search keyword">
-        <button type="submit" title="Search"><i class="bi bi-search"></i></button>
-      </form>
-    </div><!-- End Search Bar -->
+
+
 
     <nav class="header-nav ms-auto">
       <ul class="d-flex align-items-center">
@@ -169,8 +158,20 @@
         <li class="nav-item dropdown pe-3">
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-            <img src="{{ url('public/asstes/img/profile/'.Auth::user()->profile_pic) }}" alt="Profile" class="rounded-circle">
-            <span class="d-none d-md-block dropdown-toggle ps-2">{{ Auth::user()->name }}</span>
+@if(Auth::user()->user_type==1)
+<img src="{{ url('public/images/admin/'.Auth::user()->profile_pic) }}" alt="Profile" class="rounded-circle">
+            <span class="d-none d-md-block dropdown-toggle ps-2">{{ Auth::user()->name }} {{ Auth::user()->last_name }}</span>
+@elseif(Auth::user()->user_type==2)
+<img src="{{ url('public/images/students/'.Auth::user()->profile_pic) }}" alt="Profile" class="rounded-circle">
+            <span class="d-none d-md-block dropdown-toggle ps-2">{{ Auth::user()->name }} {{ Auth::user()->last_name }}</span>
+@elseif(Auth::user()->user_type==3)
+<img src="{{ url('public/images/teachers/'.Auth::user()->profile_pic) }}" alt="Profile" class="rounded-circle">
+            <span class="d-none d-md-block dropdown-toggle ps-2">{{ Auth::user()->name }} {{ Auth::user()->last_name }}</span>
+@elseif(Auth::user()->user_type==4)
+<img src="{{ url('public/images/parents/'.Auth::user()->profile_pic) }}" alt="Profile" class="rounded-circle">
+            <span class="d-none d-md-block dropdown-toggle ps-2">{{ Auth::user()->name }} {{ Auth::user()->last_name }}</span>
+@endif
+
           </a><!-- End Profile Iamge Icon -->
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
