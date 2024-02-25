@@ -124,12 +124,17 @@ Route::group(['middleware' => 'admin'], function () {
     Route::post('admin/assign-subject/update', [ClassSubjectController::class, 'Update'])->name('UpdateAssign');
     Route::get('admin/assign-subject/delete/{id}', [ClassSubjectController::class, 'Delete'])->name('DeleteAssign');
     Route::get('admin/assign-subject/search', [ClassSubjectController::class, 'Search'])->name('AssignSearch');
+
     //Assign class to Teacher....
     Route::get('admin/teacher/assigen_class_teacher/list', [AssignClassToTeacherController::class, 'list'])->name('assigen.class.list');
     Route::get('admin/teacher/assigen_class/add', [AssignClassToTeacherController::class, 'add'])->name('assigen.class.add');
     Route::post('admin/teacher/assigen_class/insert', [AssignClassToTeacherController::class, 'insert'])->name('assigen.class.insert');
     Route::get('admin/teacher/assigen_class_teacher/edit/{id}', [AssignClassToTeacherController::class, 'edit'])->name('assigen.class.edit');
-    // edit single
+    Route::post('admin/teacher/assigen_class_teacher/update/{id}', [AssignClassToTeacherController::class, 'update'])->name('assigen.class.update');
+    //edit sigle class assigend to teacher
+    Route::get('admin/teacher/assigen_class_teacher/edit-single/{id}', [AssignClassToTeacherController::class, 'edit_single'])->name('assigen.class.edit');
+    Route::post('admin/teacher/assigen_class_teacher/update-single/{id}', [AssignClassToTeacherController::class, 'update'])->name('assigen.class.update');
+    // edit single subject
     Route::get('admin/assign-subject/update-single/{id}', [ClassSubjectController::class, 'Edit_single'])->name('EditView_single');
     Route::post('admin/updatesinglesubject/{id}', [ClassSubjectController::class, 'Update_single'])->name('UpdatSingleSubject');
     //change password

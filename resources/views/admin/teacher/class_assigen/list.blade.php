@@ -38,19 +38,19 @@
                             {{-- {{(query1.data.offset.toNumber() + ($index + 1))}} --}}
                             <th data-sortable="true" style="width: 7.320939334637966%;"><button
                                     class="datatable-sorter">#</button></th>
-                            <th data-sortable="true" style="width: 19.320939334637966%;"><button
+                            <th data-sortable="true" style="width: 12.320939334637966%;"><button
                                     class="datatable-sorter">Class Name</button></th>
-                            <th data-sortable="true" style="width: 19.320939334637966%;"><button
+                            <th data-sortable="true" style="width: 12.320939334637966%;"><button
                                     class="datatable-sorter">Teacher First Name</button></th>
-                            <th data-sortable="true" style="width: 19.320939334637966%;"><button
+                            <th data-sortable="true" style="width: 12.320939334637966%;"><button
                                     class="datatable-sorter">Teacher Last Name</button></th>
                             <th data-sortable="true" style="width: 10.51859099804305%;"><button
                                     class="datatable-sorter">Status</button></th>
-                            <th data-sortable="true" style="width: 15.76320939334638%;"><button
+                            <th data-sortable="true" style="width: 10.76320939334638%;"><button
                                     class="datatable-sorter">Created By</button></th>
                             <th data-sortable="true" style="width: 17.76320939334638%;"><button
                                     class="datatable-sorter">Created Date</button></th>
-                            <th data-sortable="true" style="width: 19.960861056751465%;"><button
+                            <th data-sortable="true" style="width: 30.960861056751465%;"><button
                                     class="datatable-sorter">Action</button></th>
                         </tr>
                     </thead>
@@ -73,9 +73,10 @@
                                         @endif
                                         <td>{{ $value->created_by_name }}</td>
                                         <td>{{ $value->created_at }}</td>
-                                        <td>
-                                            <a href="{{ url('admin/teacher/assigen_class_teacher/edit/'.$value->id) }}" class="btn btn-success">Edit</a>
-                                        </td>
+                                        <td style="width:20%">
+                                            <a href="{{ url('admin/teacher/assigen_class_teacher/edit/'.$value->id) }}" class="btn btn-primary btn-sm">Edit All</a>
+
+                                            <a href="{{ url('admin/teacher/assigen_class_teacher/edit-single/'.$value->id) }}" class="btn btn-primary btn-sm">Edit Single</a> </td>
                                 </tr>
                             @endforeach
 
