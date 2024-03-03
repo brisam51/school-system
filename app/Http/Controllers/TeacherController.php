@@ -67,7 +67,7 @@ class TeacherController extends Controller
             $teacher->created_at = Carbon::now();
 
             if ($request->hasFile('profile_pic')) {
-                
+
                 $newImagename = time() . '-' . $request->name . '.' . $request->profile_pic->extension();
                 $request->profile_pic->move(public_path('images/teachers/'), $newImagename);
                 $teacher->profile_pic = $newImagename;
@@ -176,4 +176,13 @@ class TeacherController extends Controller
 
         return view('admin.Teacher.list', $data);
     }
+
+//my subject class
+
+
+
+
+
+
+
 } //end class

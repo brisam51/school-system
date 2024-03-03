@@ -126,10 +126,17 @@ class UserController extends Controller
         $data['value'] = User::getSingle(Auth::user()->id);
 
         if (Auth::user()->id == 3) {
-            return view('teacher.myaccount', $data);
+            return view('admin.myaccount', $data);
         } elseif (Auth::user()->id == 4) {
             return view('parent.myaccount', $data);
         }
+
+    }
+
+    public function Teacher_account_view(){
+        $data['value'] = User::getSingle(Auth::user()->id);
+
+            return view('teacher.myaccount', $data);
 
     }
 
@@ -169,7 +176,7 @@ class UserController extends Controller
             $teacher->updated_at = Carbon::now();
             if ($request->hasFile('profile_pic')) {
                 $newImagename = time() . '-' . $request->name . '.' . $request->profile_pic->extension();
-                $request->profile_pic->move(public_path('asstes/img/profile'), $newImagename);
+                $request->profile_pic->move(public_path('images/teachers/'), $newImagename);
                 $teacher->profile_pic = $newImagename;
             }
             $teacher->save();

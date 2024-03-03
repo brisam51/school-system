@@ -47,7 +47,7 @@ class ClassSubjectController extends Controller
 
 
             }
-            return redirect("admin/teacher/assigen_class/list")->with("success", "class Assigened to teacher Successfully Assigned To class");
+            return redirect("admin/assign-subject/list")->with("success", "class Assigened to teacher Successfully Assigned To class");
         } else {
             return "errors";
         }

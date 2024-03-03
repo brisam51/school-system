@@ -63,18 +63,20 @@
                         {{-- @if($profile_data->p_religion == $religion->religion_id) selected @endif --}}
 
                         {{-- end --}}
-                        <div class="row mb-4">
+                        <div class="row mb-4 overflow-auto">
                             <label for="inputEmail3" class="col-sm-2 col-form-label" style="width: 150px">Subject
                                 Name:</label>
+<div class="container vertical-scrollable">
 
-                            @foreach ($getSubject as $subject)
-                                <div>
-                                    <label class="form-control">
-                                        <input type="checkbox" value="{{ $subject->id }}" name=" subject_id[]"
-                                            id="">{{ $subject->name }}
-                                    </label>
-                                </div>
-                            @endforeach
+    @foreach ($getSubject as $subject)
+    <div >
+        <label class="form-control">
+            <input type="checkbox" value="{{ $subject->id }}" name=" subject_id[]"
+                id="">{{ $subject->name }}
+        </label>
+    </div>
+@endforeach
+</div>
 
 
 

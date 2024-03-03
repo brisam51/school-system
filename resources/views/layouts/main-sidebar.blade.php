@@ -4,8 +4,9 @@
 
         @if (Auth::user()->user_type == 1)
             <li class="nav-item  ">
+
                 <a class="nav-link {{ Route::is('admin.dashboard') ? 'text-white bg-primary rounded' : '' }}"
-                    href="{{ url('admin/dashboard') }}">
+                    href="{{ route('admin.dashboard') }}">
                     <i class="bi bi-grid text-white"></i>
                     <span>Dashboard</span>
                 </a>
@@ -43,7 +44,7 @@
             </li>
             <li class="nav-item  ">
                 <div>
-                    <a href="{{ route('admin.teacher.list') }}  " class="nav-link collapsed ">
+                    <a href="{{ route('admin.teacher.list') }}  " class="nav-link collapsed  {{ Route::is('admin.teacher.list') ? 'text-white bg-primary rounded' : '' }} ">
                         <i class="bi bi-people"></i>
 
                         <span>Teachers</span>
@@ -147,25 +148,33 @@
                     </a>
                 </div>
             </li>
+            {{-- start teacher section --}}
         @elseif(Auth::user()->user_type == 3)
             <li class="nav-item">
-                <a class="nav-link @if (Request::segment(3) == 'dashboard') 'active' @endif"
+                <a class="nav-link {{ Route::is('teacher.dashboard') ? 'text-white bg-primary rounded' : '' }} "
                     href="{{ url('teacher/dashboard') }}">
+                    <i class="bi bi-grid"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li><!-- End Dashboard Nav -->
+
+            <li class="nav-item">
+                <a class="nav-link {{ Route::is('teacher.account') ? 'text-white bg-primary rounded' : '' }} "
+                    href="{{ route('teacher.account') }}">
                     <i class="bi bi-grid"></i>
                     <span>My Account</span>
                 </a>
             </li><!-- End Dashboard Nav -->
-
-
             <li class="nav-item">
-                <a class="nav-link  " href="{{ url('teacher/account') }}">
+                <a class="nav-link {{ Route::is('teacher.class_subject') ? 'text-white bg-primary rounded' : '' }} "
+                    href="{{ route('teacher.class_subject') }}">
                     <i class="bi bi-grid"></i>
-                    <span>My Account</span>
+                    <span>My Class & Subject</span>
                 </a>
             </li>
             <li class="nav-item  ">
                 <div>
-                    <a class="nav-link" href="{{ url('teacher/change_password') }}">
+                    <a class="nav-link  {{ Route::is('teacher.change.password') ? 'text-white bg-primary rounded' : '' }} " href="{{ url('teacher/change_password') }}">
                         <i class="bi bi-tag"></i>
                         <span>Chang Password</span>
 

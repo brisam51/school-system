@@ -101,6 +101,8 @@ class AssignClassToTeacherController extends Controller
     //call view edit single class which assigend to teacher
     public function edit_single($id)
     {
+
+        $getRecord = AssigenClassTeacherModel::getSingle($id);
         if (!empty($getRecord)) {
             $data['getRecord'] = $getRecord;
             $data['getClass'] = ClassModel::getClass();
@@ -112,6 +114,43 @@ class AssignClassToTeacherController extends Controller
         } else {
             abort(404);
         }
+
     }
+    public function update_single(Request $request, $id)
+    {
+
+        $getAllreadyFirst = AssigenClassTeacherModel::getAllreadyFirst($request->class_id, $request->teacher_id);
+
+        if (!empty($getAllreadyFirst)) {
+            $getAllreadyFirst->status = $request->status;
+            $getAllreadyFirst->save();
+            return redirect('admin/teacher/assigen_class_teacher/list')->with('success', 'update teacher from class success fully');
+        } else {
+            $save = AssigenClassTeacherModel::getSingle($id);
+
+            $save->class_id = $request->class_id;
+            $save->teacher_id = $request->teacher_id;
+            $save->status = $request->status;
+            $save->save();
+            return redirect('admin/teacher/assigen_class_teacher/list')->with('success', 'update teacher from class success fully');
+        }
+    }
+    //delete
+    public function delete($id)
+    {
+        $save = AssigenClassTeacherModel::getSingle($id);
+        $save->delete();
+        return redirect('admin/teacher/assigen_class_teacher/list')->with('success', 'teacher deleted success fully');
+    }
+
+    //teacher subject class
+    public function mysubjectClass()
+    {
+
+        $data['getRecord']=AssigenClassTeacherModel::getMyClassSubject(Auth::user()->id);
+        $data['header_title'] = 'My Class and Subjects';
+        return view('teacher.my_class_subject', $data);
+    }
+
 
 }//end class

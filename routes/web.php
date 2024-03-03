@@ -59,9 +59,13 @@ Route::group(['middleware' => 'admin'], function () {
     Route::post('admin/update/{id}', [AdminController::class, 'updateAdminPost'])->name('updateadmin');
     Route::get('admin/delete/{id}', [AdminController::class, 'adminDelete']);
     Route::post('admin/search', [AdminController::class, 'AdminSearch']);
-    //update admin account
+    //update account(Admin/Teacher/Student?parent)
+    //1-admin
     Route::get('admin/account', [UserController::class, 'admin_Account_view'])->name('admin.myaccount');
     Route::post('admin/account/update', [UserController::class, 'admin_Account_Update']);
+    //2-teacher
+    Route::get('admin/My_account', [UserController::class, 'myAccount'])->name('admin.myaccount');
+    Route::post('admin/teacher/update', [UserController::class, 'admin_Account_Update']);
 
     //Student Route
     Route::get('admin/student/list', [StudentController::class, 'List'])->name('admin.student.list');
@@ -82,7 +86,8 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('admin/teacher/delete/{id}', [TeacherController::class, 'Delete'])->name('admin.teacher.delete');
     Route::get('admin/teacher/search', [TeacherController::class, 'Search'])->name('admin.teacher.search');
 
-    //Parent Routes//////////////////////////////////////////////////////////////////////////
+
+    //Parent Routes////////////////
 
     Route::get('admin/Parent/list', [ParentController::class, 'List'])->name('admin.parent.list');
     Route::get('admin/parent/add', [ParentController::class, 'Add'])->name('admin.parent.add');
@@ -96,10 +101,7 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('admin/parent/assign_student_parent/{student_id}/{parent_id}', [ParentController::class, 'AssignStudentParent']);
     Route::get('admin/parent/assign_student_parent_delete/{id}', [ParentController::class, 'AssignStudentParentDelete']);
 
-    //admin/parent/assign_student_parent_delete/
-
-
-    //Class route
+      //Class route
     Route::get('admin/class/list', [ClassController::class, 'List']);
     Route::get('admin/class/newclass', [ClassController::class, 'NewClass']);
     Route::post('admin/class/insert', [ClassController::class, 'insertNewClass']);
@@ -116,7 +118,7 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('admin/subject/delete/{id}', [SubjectController::class, 'DeleteSubject'])->name('DeleteSubject');
     Route::get('admin/subject/search', [SubjectController::class, 'SubjectSearch'])->name('SubjectSearch');
 
-    //Assign Subject Routs...
+    //Assign Subject Routs...zzz
     Route::get('admin/assign-subject/list', [ClassSubjectController::class, 'List']);
     Route::get('admin/assign-subject/add', [ClassSubjectController::class, 'Add']);
     Route::post('admin/assign-subject/insert', [ClassSubjectController::class, 'Insert']);
@@ -131,9 +133,13 @@ Route::group(['middleware' => 'admin'], function () {
     Route::post('admin/teacher/assigen_class/insert', [AssignClassToTeacherController::class, 'insert'])->name('assigen.class.insert');
     Route::get('admin/teacher/assigen_class_teacher/edit/{id}', [AssignClassToTeacherController::class, 'edit'])->name('assigen.class.edit');
     Route::post('admin/teacher/assigen_class_teacher/update/{id}', [AssignClassToTeacherController::class, 'update'])->name('assigen.class.update');
+    //sereach
+    Route::get('admin/teacher/assigen_class_teacher/sereach', [AssignClassToTeacherController::class, 'sreach'])->name('assigen.class.teacher.sreach');
     //edit sigle class assigend to teacher
     Route::get('admin/teacher/assigen_class_teacher/edit-single/{id}', [AssignClassToTeacherController::class, 'edit_single'])->name('assigen.class.edit');
-    Route::post('admin/teacher/assigen_class_teacher/update-single/{id}', [AssignClassToTeacherController::class, 'update'])->name('assigen.class.update');
+    Route::post('admin/teacher/assigen_class_teacher/update-single/{id}', [AssignClassToTeacherController::class, 'update_single'])->name('assigen_classtoTecher.update');
+    Route::get('admin/teacher/assigen_class_teacher/delete/{id}', [AssignClassToTeacherController::class, 'delete'])->name('assigen_classtoTecher.delete');
+
     // edit single subject
     Route::get('admin/assign-subject/update-single/{id}', [ClassSubjectController::class, 'Edit_single'])->name('EditView_single');
     Route::post('admin/updatesinglesubject/{id}', [ClassSubjectController::class, 'Update_single'])->name('UpdatSingleSubject');
@@ -164,11 +170,12 @@ Route::group(['middleware' => 'student'], function () {
 });
 //Teacher dashboard
 Route::group(['middleware' => 'teacher'], function () {
-    Route::get('teacher/dashboard', [DashboardController::class, 'dashboard']);
-    Route::get('teacher/change_password', [UserController::class, 'teacherChangePasswordView']);
+    Route::get('teacher/dashboard', [DashboardController::class, 'dashboard'])->name('teacher.dashboard');
+    Route::get('teacher/change_password', [UserController::class, 'teacherChangePasswordView'])->name('teacher.change.password');
     Route::post('teacher/update_password', [UserController::class, 'teacherUpdatePassword']);
-    Route::get('teacher/account', [UserController::class, 'myAccount']);
+    Route::get('teacher/account', [UserController::class, 'Teacher_account_view'])->name('teacher.account');
     Route::post('teacher/account/update', [UserController::class, 'Teacher_Account_Update']);
+    Route::get('teacher/class_subject',[AssignClassToTeacherController::class, 'mysubjectClass'])->name('teacher.class_subject');
 });
 //Parent dashboard
 Route::group(['middleware' => 'parent'], function () {
