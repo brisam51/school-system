@@ -30,7 +30,7 @@
   {{-- start headbar --}}
 
   <!-- ======= Sidebar ======= -->
-  @include('layouts.main-sidebar')
+  @include('layouts.main_sidebar')
 
   <!-- End Sidebar-->
 {{-- start main content --}}
@@ -39,30 +39,13 @@
     <div class="pagetitle">
       <h1>@yield('maintopic')</h1>
       <nav>
-        {{-- I make below change in 14021129 --}}
-        {{-- <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="">@yield('homepage')</a></li>
-          <li class="breadcrumb-item active">@yield('secondpage')</li>
-        </ol> --}}
-      </nav>
-    </div>
-    <!-- End Page Title -->
 
-   {{-- start content --}}
+      </nav>
+
 @yield('content')
    {{-- end content --}}
   </main>
 
-  {{-- end main content --}}
-
-  <!-- ======= Footer ======= -->
-  {{-- @include('layouts.footer') --}}
-  <!-- End Footer -->
-
-
-
-  <!-- Vendor JS Files -->
-  {{-- JavaScriptsLinks --}}
 
   {{-- end java script links --}}
   @include('layouts.footer-scripts')

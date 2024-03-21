@@ -45,8 +45,10 @@
 
 
                 </div>
-                <div class="card">
-
+                <div class="card mt-4 ">
+                    <div class="card-header d-flex justify-content-center text-dark">
+                        <h2>Subject List</h2>
+                    </div>
                     <!-- Table with stripped rows -->
                     <div class="datatable-wrapper datatable-loading no-footer sortable searchable fixed-columns">
 

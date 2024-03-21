@@ -102,7 +102,7 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('admin/parent/assign_student_parent_delete/{id}', [ParentController::class, 'AssignStudentParentDelete']);
 
       //Class route
-    Route::get('admin/class/list', [ClassController::class, 'List']);
+    Route::get('admin/class/list', [ClassController::class, 'List'])->name('admin.class.list');
     Route::get('admin/class/newclass', [ClassController::class, 'NewClass']);
     Route::post('admin/class/insert', [ClassController::class, 'insertNewClass']);
     Route::get('admin/class/update/{id}', [ClassController::class, 'updateClassView'])->name('classUpdateView');
@@ -176,6 +176,9 @@ Route::group(['middleware' => 'teacher'], function () {
     Route::get('teacher/account', [UserController::class, 'Teacher_account_view'])->name('teacher.account');
     Route::post('teacher/account/update', [UserController::class, 'Teacher_Account_Update']);
     Route::get('teacher/class_subject',[AssignClassToTeacherController::class, 'mysubjectClass'])->name('teacher.class_subject');
+    //stuent f teacher
+    //teacher.mystudent
+    Route::get('teacher/mystudent',[StudentController::class, 'mystudent'])->name('teacher.mystudent');
 });
 //Parent dashboard
 Route::group(['middleware' => 'parent'], function () {

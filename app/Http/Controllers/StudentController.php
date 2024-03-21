@@ -266,5 +266,12 @@ class StudentController extends Controller
             return view('admin.student.list', ['getStudent' => $getStudent, 'header_title' => $header_titel]);
         }
     }
+
+    //teacher side
+    public function mystudent(){
+        $data['getRecord']=User::getTeacherStudent(Auth::user()->id);
+        $data['header_title']='My student List';
+        return view('teacher.mystudent',$data);
+    }
 } //end class
 

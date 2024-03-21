@@ -76,7 +76,7 @@ class User extends Authenticatable
 
 
 
-//get All student
+    //get All student
     static public function getStudent()
     {
 
@@ -89,7 +89,7 @@ class User extends Authenticatable
         return $return;
     }
 
-//get profile information
+    //get profile information
     public function getProfile()
     {
         if (!empty($this->profile_pic) && file_exists('upload/profile/' . $this->profile_pic)) {
@@ -100,7 +100,7 @@ class User extends Authenticatable
     }
 
 
-//get all parent
+    //get all parent
     static public function getParents()
     {
         $return = self::select('users.*')
@@ -109,11 +109,11 @@ class User extends Authenticatable
             ->paginate(10);
         return $return;
     }
-//get student by search
+    //get student by search
     static public function getSearchStudent()
     {
-               if (!empty(Request::get('id')) || !empty(Request::get('name')) || !empty(Request::get('last_name')) || !empty(Request::get('email'))) {
-                       $return = self::select('users.*', 'class.name as class_name', 'parent.name as parent_name')
+        if (!empty(Request::get('id')) || !empty(Request::get('name')) || !empty(Request::get('last_name')) || !empty(Request::get('email'))) {
+            $return = self::select('users.*', 'class.name as class_name', 'parent.name as parent_name')
                 ->join('class', 'users.class_id', '=', 'class.id', 'left')
                 ->join('users as parent', 'parent.id', '=', 'users.parent_id', 'left')
                 ->where('users.user_type', '=', 2);
@@ -165,9 +165,22 @@ class User extends Authenticatable
     {
         $return = self::select('users.*')
             ->where('users.user_type', '=', 3)
-            ->orderBy('users.name','desc')
+            ->orderBy('users.name', 'desc')
             ->get();
         return $return;
     }
 
+    //work for teacher side
+    static public function getTeacherStudent($teacher_id)
+    {
+        $return = self::select('users.*','class.name as class_name')
+            ->join('class', 'class.id', '=', 'users.class_id')
+            ->join('assigen_class_teacher', 'assigen_class_teacher.class_id', '=', 'class.id')
+            ->where('assigen_class_teacher.teacher_id', '=', $teacher_id)
+            ->where('assigen_class_teacher.status', '=', 0)
+            ->where('users.user_type', '=', 2)
+            ->groupBy('users.id')
+            ->paginate(10);
+        return $return;
+    }
 } //end class
