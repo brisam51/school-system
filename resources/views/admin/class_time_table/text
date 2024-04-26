@@ -1,0 +1,61 @@
+ <form action="">
+                                            <div class="form-group col-md-3 p-2">
+                                                <label for="my-input">Class name</label>
+                                                <select class="form-control getClass" id="getClass" name="class_id"
+                                                    style="width: 200px;" required>
+                                                    <option value=" ">--Select Class--</option>
+                                                    @foreach ($getClass as $class)
+                                                        <option class="tor" value="{{ $class->id }}">
+                                                            {{ $class->name }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            <div class="form-group col-md-3 p-2">
+                                                <label for="my-input">Subject Name</label>
+                                                <select class="form-control  getSubject" name="subject_id"
+                                                    style="width: 200px;">
+
+
+                                                </select>
+                                            </div>
+                                            <div class="form-group col-md-3 p-2">
+                                                <label for="my-input">Date</label>
+                                                <input id="date" class="form-control" type="date" name="date"
+                                                    value="{{ Request::get('date') }}">
+                                            </div>
+                                            <div class="form-group col-md-3 p-2">
+                                                <div class="row ">
+                                                    <button type="submit" class="btn btn-primary  mt-4 "
+                                                        style="width: 80px; margin-right:10px;">Search</button>
+                                                    <a href="{{ url('admin/class_time_table/list') }}"
+                                                        class="btn btn-success  mt-4  " style="width: 80px">Reset</a>
+
+                                                </div>
+
+                                            </div>
+
+
+
+                                        </form>
+
+
+                                        ///////////////////////////////////
+                                        $(".getClass").change(function() {
+            var class_id = $(this).val();
+
+            $.ajax({
+                type: "get",
+                url: "{{ url('admin/class_timetable/get_subject') }}",
+                data: {
+                    "_token": "{{ csrf_token() }}",
+                    class_id:class_id,
+
+                },
+                datatypr:"json",
+                success:function(){
+
+                },
+            });
+
+        });

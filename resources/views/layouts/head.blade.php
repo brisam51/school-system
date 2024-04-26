@@ -23,4 +23,4 @@
 <link  type="text/css" href="{{ url('assets/css/virtual-select.min.css') }}"  rel="stylesheet">
 <!-- Template Main CSS File -->
 <link href="{{ url('assets/css/style.css') }}" rel="stylesheet">
-@yield('css-file')
+@yield('style')

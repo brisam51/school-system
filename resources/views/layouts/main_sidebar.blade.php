@@ -45,7 +45,7 @@
             <li class="nav-item  ">
                 <div>
                     <a href="{{ route('admin.teacher.list') }}  "
-                        class="nav-link collapsed  {{ Route::is('admin.teacher.list') ? 'text-white bg-primary rounded' : '' }} ">
+                        class="nav-link collapsed {{ Route::is('admin.teacher.list') ? 'text-white bg-primary rounded' : ''  }} ">
                         <i class="bi bi-people"></i>
 
                         <span>Teachers</span>
@@ -55,7 +55,7 @@
             </li>
             <li class="nav-item  ">
                 <div>
-                    <a href="{{ route('admin.parent.list') }}  " class="nav-link collapsed ">
+                    <a href="{{ route('admin.parent.list') }}  " class="nav-link collapsed {{ Route::is('admin.parent.list') ? 'text-white bg-primary rounded' : ''  }}">
                         <i class="bi bi-people"></i>
 
                         <span>Parents</span>
@@ -64,108 +64,45 @@
 
             </li>
 
-            <li class="nav-item ">
 
-                <a class="nav-link " data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#"
+
+            <li class="nav-item">
+                <a class="nav-link  @if(Request::segment(2)=='class'||Request::segment(2)=='subject'||Request::segment(2)=='assign-subject'||Request::segment(3)=='assigen_class_teacher'||Request::segment(2)=='class_timetable') bg-primary text-white @endif " data-bs-target="#components-nav" data-bs-toggle="collapse" href="#"
                     aria-expanded="true">
-
-                    <i class="bi bi-journal-text"></i><span>Acadmics</span><i class="bi bi-chevron-down ms-auto"></i>
+                    <i class="bi bi-menu-button-wide"></i><span>Acadmic</span><i
+                        class="bi bi-chevron-down ms-auto"></i>
                 </a>
-                <ul id="forms-nav" class="nav-content collapse bg-white " data-bs-parent="#sidebar-nav">
+                <ul id="components-nav" class="nav-content collapse @if(Request::segment(2)=='class'||Request::segment(2)=='subject'||Request::segment(2)=='assign-subject'||Request::segment(3)=='assigen_class_teacher'||Request::segment(2)=='class_timetable') show @endif " data-bs-parent="#sidebar-nav" style="">
                     <li>
-                        <div>
-                            <a href="{{ url('admin/class/list') }}  "
-                                class="nav-link collapsed {{ request()->is('admin/class/list') ? 'bg-primary text-white' : '' }} ">
-                                <i class="bi bi-tag"></i>
-
-                                <span>Class</span>
-                            </a>
-                        </div>
+                        <a href="{{ url('admin/class/list') }} " class=" @if(Request::segment(2)=='class') text-white @endif">
+                            <i class="bi bi-circle"></i><span>Class</span>
+                        </a>
                     </li>
-                    <li class="nav-item  ">
-                        <div>
-                            <a href="{{ url('admin/subject/list') }}  "
-                                class="nav-link collapsed {{ request()->is('admin/subject/list') ? 'bg-primary text-white' : '' }}">
-                                <i class="bi bi-tag"></i>
-
-                                <span>Subject</span>
-                            </a>
-                        </div>
-
+                    <li>
+                        <a href="{{ url('admin/class_timetable/list') }}"  class=" @if(Request::segment(2)=='class_timetable') text-white @endif">
+                            <i class="bi bi-circle"></i><span>Class Time Table</span>
+                        </a>
                     </li>
-                    <li class="nav-item  ">
-                        <div>
-                            <a class="nav-link collapsed {{ request()->is('admin/assign-subject/list') ? 'bg-primary text-white' : '' }} "
-                                href="{{ url('admin/assign-subject/list') }}">
-                                <i class="bi bi-tag"></i>
-
-                                <span>Assign Subject To Class</span>
-                            </a>
-                        </div>
-
+                    <li>
+                        <a href="{{ url('admin/subject/list') }}" class=" @if(Request::segment(2)=='subject') text-white @endif">
+                            <i class="bi bi-circle"></i><span>Subject</span>
+                        </a>
                     </li>
-                    <li class="nav-item  ">
-                        <div>
-                            <a class="nav-link collapsed  {{ request()->is('admin/teacher/assigen_class_teacher/list') ? 'bg-primary text-white' : '' }}"
-                                href="{{ url('admin/teacher/assigen_class_teacher/list') }}  ">
-                                <i class="bi bi-tag"></i>
-                                <span>Assigen Class To Teacher</span>
-
-                            </a>
-                        </div>
-
+                    <li>
+                        <a href="{{ url('admin/assign-subject/list') }}"  class=" @if(Request::segment(2)=='assign-subject') text-white @endif" >
+                            <i class="bi bi-circle"></i><span>Assigen Subject to Class</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ url('admin/teacher/assigen_class_teacher/list') }}"  class=" @if(Request::segment(3)=='assigen_class_teacher') text-white @endif">
+                            <i class="bi bi-circle"></i><span>Assigen Class To Teacher</span>
+                        </a>
                     </li>
                 </ul>
             </li>
-
-            {{-- end dropmenu --}}
-
-            {{-- <li class="nav-item  ">
-                <div>
-                    <a href="{{ url('admin/class/list') }}  "
-                        class="nav-link collapsed {{ request()->is('admin/class/list') ? 'active' : '' }}">
-                        <i class="bi bi-tag"></i>
-
-                        <span>Class</span>
-                    </a>
-                </div>
-
-            </li> --}}
-            {{-- subject section start --}}
-            {{-- <li class="nav-item  ">
-                <div>
-                    <a href="{{ url('admin/subject/list') }}  "
-                        class="nav-link collapsed {{ request()->is('admin/subject/list') ? 'active' : '' }}">
-                        <i class="bi bi-tag"></i>
-
-                        <span>Subject</span>
-                    </a>
-                </div>
-
-            </li> --}}
-            {{-- <li class="nav-item  ">
-                <div>
-                    <a class="nav-link collapsed" href="{{ url('admin/assign-subject/list') }}">
-                        <i class="bi bi-tag"></i>
-
-                        <span>Assign Subject To Class</span>
-                    </a>
-                </div>
-
-            </li> --}}
-            {{-- <li class="nav-item  ">
-                <div>
-                    <a class="nav-link collapsed {{ Route::is('assigen.class.list')?'text-white bg-primary ':'' }}" href="{{ url('admin/teacher/assigen_class_teacher/list') }}  ">
-                        <i class="bi bi-tag"></i>
-                        <span>Assigen Class To Teacher</span>
-
-                    </a>
-                </div>
-
-            </li> --}}
             <li class="nav-item  ">
                 <div>
-                    <a class="nav-link collapsed" href="{{ url('admin/change_password') }}  ">
+                    <a class="nav-link collapsed @if(Request::segment(2)=='change_password') bg-primary text-white  @endif" href="{{ url('admin/change_password') }}"  >
                         <i class="bi bi-tag"></i>
                         <span>Change Password</span>
 
@@ -283,18 +220,12 @@
 
 
         <li class="nav-item">
-            <a class="nav-link collapsed" href="{{ url('logout') }}">
+            <a class="nav-link collapsed  " href="{{ url('logout') }}">
                 <i class="bi bi-file-earmark"></i>
                 <span>Logout</span>
             </a>
         </li><!-- End log out Page Nav -->
 
-        {{-- <li class="nav-item">
-      <a class="nav-link collapsed" href="pages-blank.html">
-        <i class="bi bi-file-earmark"></i>
-        <span>Blank</span>
-      </a>
-    </li><!-- End Blank Page Nav --> --}}
 
     </ul>
 
