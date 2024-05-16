@@ -134,7 +134,7 @@ class ClassSubjectController extends Controller
             return redirect("admin/assign-subject/list")->with("success", "assignSubject with class name Successfully ");
         }
 
-        dd($getAllreadyFirt);
+      
     }
 
 

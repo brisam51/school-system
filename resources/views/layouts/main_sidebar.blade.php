@@ -45,7 +45,7 @@
             <li class="nav-item  ">
                 <div>
                     <a href="{{ route('admin.teacher.list') }}  "
-                        class="nav-link collapsed {{ Route::is('admin.teacher.list') ? 'text-white bg-primary rounded' : ''  }} ">
+                        class="nav-link collapsed {{ Route::is('admin.teacher.list') ? 'text-white bg-primary rounded' : '' }} ">
                         <i class="bi bi-people"></i>
 
                         <span>Teachers</span>
@@ -55,7 +55,8 @@
             </li>
             <li class="nav-item  ">
                 <div>
-                    <a href="{{ route('admin.parent.list') }}  " class="nav-link collapsed {{ Route::is('admin.parent.list') ? 'text-white bg-primary rounded' : ''  }}">
+                    <a href="{{ route('admin.parent.list') }}  "
+                        class="nav-link collapsed {{ Route::is('admin.parent.list') ? 'text-white bg-primary rounded' : '' }}">
                         <i class="bi bi-people"></i>
 
                         <span>Parents</span>
@@ -63,46 +64,82 @@
                 </div>
 
             </li>
-
-
-
+            {{-- -------------------- --}}
             <li class="nav-item">
-                <a class="nav-link  @if(Request::segment(2)=='class'||Request::segment(2)=='subject'||Request::segment(2)=='assign-subject'||Request::segment(3)=='assigen_class_teacher'||Request::segment(2)=='class_timetable') bg-primary text-white @endif " data-bs-target="#components-nav" data-bs-toggle="collapse" href="#"
-                    aria-expanded="true">
-                    <i class="bi bi-menu-button-wide"></i><span>Acadmic</span><i
-                        class="bi bi-chevron-down ms-auto"></i>
+                <a class="nav-link collapsed @if (Request::segment(2) == 'exam') bg-primary text-white @endif"
+                    data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
+                    <i class="bi bi-journal-text"></i><span>Examanition</span><i class="bi bi-chevron-down ms-auto"></i>
                 </a>
-                <ul id="components-nav" class="nav-content collapse @if(Request::segment(2)=='class'||Request::segment(2)=='subject'||Request::segment(2)=='assign-subject'||Request::segment(3)=='assigen_class_teacher'||Request::segment(2)=='class_timetable') show @endif " data-bs-parent="#sidebar-nav" style="">
+                <ul id="forms-nav" class="nav-content collapse @if (Request::segment(2) == 'exam'||Request::segment(2) == 'exam_schedule') show @endif"
+                    data-bs-parent="#sidebar-nav">
                     <li>
-                        <a href="{{ url('admin/class/list') }} " class=" @if(Request::segment(2)=='class') text-white @endif">
+                        <a href="{{ url('admin/exam/list') }}"
+                            class="@if (Request::segment(2) == 'exam') text-white @endif">
+                            <i class="bi bi-circle"></i><span>Exam</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ url('admin/exam_schedule') }}"
+                            class="@if (Request::segment(2) == 'exam_schedule') text-white @endif">
+                            <i class="bi bi-circle"></i><span>Exam Schdule</span>
+                        </a>
+                    </li>
+
+                </ul>
+            </li>
+            {{-- ======================= --}}
+            <li class="nav-item">
+                <a class="nav-link  @if (Request::segment(2) == 'class' ||
+                        Request::segment(2) == 'subject' ||
+                        Request::segment(2) == 'assign-subject' ||
+                        Request::segment(3) == 'assigen_class_teacher' ||
+                        Request::segment(2) == 'class_timetable') bg-primary text-white @endif "
+                    data-bs-target="#components-nav" data-bs-toggle="collapse" href="#" aria-expanded="true">
+                    <i class="bi bi-menu-button-wide"></i><span>Acadmic</span><i class="bi bi-chevron-down ms-auto"></i>
+                </a>
+                <ul id="components-nav" class="nav-content collapse @if (Request::segment(2) == 'class' ||
+                        Request::segment(2) == 'subject' ||
+                        Request::segment(2) == 'assign-subject' ||
+                        Request::segment(3) == 'assigen_class_teacher' ||
+                        Request::segment(2) == 'class_timetable') show @endif "
+                    data-bs-parent="#sidebar-nav" style="">
+                    <li>
+                        <a href="{{ url('admin/class/list') }} "
+                            class=" @if (Request::segment(2) == 'class') text-white @endif">
                             <i class="bi bi-circle"></i><span>Class</span>
                         </a>
                     </li>
                     <li>
-                        <a href="{{ url('admin/class_timetable/list') }}"  class=" @if(Request::segment(2)=='class_timetable') text-white @endif">
+                        <a href="{{ url('admin/class_timetable/list') }}"
+                            class=" @if (Request::segment(2) == 'class_timetable') text-white @endif">
                             <i class="bi bi-circle"></i><span>Class Time Table</span>
                         </a>
                     </li>
                     <li>
-                        <a href="{{ url('admin/subject/list') }}" class=" @if(Request::segment(2)=='subject') text-white @endif">
+                        <a href="{{ url('admin/subject/list') }}"
+                            class=" @if (Request::segment(2) == 'subject') text-white @endif">
                             <i class="bi bi-circle"></i><span>Subject</span>
                         </a>
                     </li>
                     <li>
-                        <a href="{{ url('admin/assign-subject/list') }}"  class=" @if(Request::segment(2)=='assign-subject') text-white @endif" >
+                        <a href="{{ url('admin/assign-subject/list') }}"
+                            class=" @if (Request::segment(2) == 'assign-subject') text-white @endif">
                             <i class="bi bi-circle"></i><span>Assigen Subject to Class</span>
                         </a>
                     </li>
                     <li>
-                        <a href="{{ url('admin/teacher/assigen_class_teacher/list') }}"  class=" @if(Request::segment(3)=='assigen_class_teacher') text-white @endif">
+                        <a href="{{ url('admin/teacher/assigen_class_teacher/list') }}"
+                            class=" @if (Request::segment(3) == 'assigen_class_teacher') text-white @endif">
                             <i class="bi bi-circle"></i><span>Assigen Class To Teacher</span>
                         </a>
                     </li>
                 </ul>
             </li>
+
             <li class="nav-item  ">
                 <div>
-                    <a class="nav-link collapsed @if(Request::segment(2)=='change_password') bg-primary text-white  @endif" href="{{ url('admin/change_password') }}"  >
+                    <a class="nav-link collapsed @if (Request::segment(2) == 'change_password') bg-primary text-white @endif"
+                        href="{{ url('admin/change_password') }}">
                         <i class="bi bi-tag"></i>
                         <span>Change Password</span>
 
@@ -127,6 +164,13 @@
                 </a>
             </li>
             <li class="nav-item">
+                <a class="nav-link  {{ Route::is('student.my_timetable') ? 'text-white bg-primary rounded' : '' }}"
+                    href="{{ route('student.my_timetable') }}">
+                    <i class="bi bi-grid"></i>
+                    <span>My Timetable</span>
+                </a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link {{ Route::is('student.account') ? 'text-white bg-primary rounded' : '' }} "
                     href="{{ url('student/account') }}">
                     <i class="bi bi-grid"></i>
@@ -145,7 +189,7 @@
             {{-- start teacher section --}}
         @elseif(Auth::user()->user_type == 3)
             <li class="nav-item">
-                <a class="nav-link {{ Route::is('teacher.dashboard') ? 'text-white bg-primary rounded' : '' }} "
+                <a class="nav-link @if (Request::segment(2) == 'dashboard') bg-primary text-white @endif "
                     href="{{ url('teacher/dashboard') }}">
                     <i class="bi bi-grid"></i>
                     <span>Dashboard</span>
@@ -153,30 +197,30 @@
             </li><!-- End Dashboard Nav -->
 
             <li class="nav-item">
-                <a class="nav-link {{ Route::is('teacher.mystudent') ? 'text-white bg-primary rounded' : '' }} "
-                    href="{{ route('teacher.mystudent') }}">
+                <a class="nav-link @if (Request::segment(2) == 'mystudent') bg-primary text-white @endif"
+                    href="{{ url('teacher/mystudent') }}">
                     <i class="bi bi-grid"></i>
                     <span>My student</span>
                 </a>
             </li><!-- End Dashboard Nav -->
 
             <li class="nav-item">
-                <a class="nav-link {{ Route::is('teacher.account') ? 'text-white bg-primary rounded' : '' }} "
-                    href="{{ route('teacher.account') }}">
+                <a class="nav-link @if (Request::segment(2) == 'account') bg-primary text-white @endif "
+                    href="{{ url('teacher/account') }}">
                     <i class="bi bi-grid"></i>
                     <span>My Account</span>
                 </a>
             </li><!-- End Dashboard Nav -->
             <li class="nav-item">
-                <a class="nav-link {{ Route::is('teacher.class_subject') ? 'text-white bg-primary rounded' : '' }} "
-                    href="{{ route('teacher.class_subject') }}">
+                <a class="nav-link @if (Request::segment(2) == 'class_subject' || Request::segment(2) == 'my_class_timetable') bg-primary text-white @endif "
+                    href="{{ url('teacher/class_subject') }}">
                     <i class="bi bi-grid"></i>
                     <span>My Class & Subject</span>
                 </a>
             </li>
             <li class="nav-item  ">
                 <div>
-                    <a class="nav-link  {{ Route::is('teacher.change.password') ? 'text-white bg-primary rounded' : '' }} "
+                    <a class="nav-link @if (Request::segment(2) == 'change_password') bg-primary text-white @endif"
                         href="{{ url('teacher/change_password') }}">
                         <i class="bi bi-tag"></i>
                         <span>Chang Password</span>

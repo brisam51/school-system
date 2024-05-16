@@ -14,6 +14,7 @@ use App\Http\Controllers\ParentController;
 use App\Http\Controllers\TeacherController;
 use App\Http\Controllers\AssignClassToTeacherController;
 use App\Http\Controllers\ClassTimeTableController;
+use App\Http\Controllers\ExamController;
 
 
 
@@ -119,7 +120,19 @@ Route::group(['middleware' => 'admin'], function () {
     //============================change password===============================
     Route::get('admin/change_password', [UserController::class, 'adminChangePasswordView']);
     Route::post('admin/update_password', [UserController::class, 'adminUpdatePassword']);
-});
+    //===================Examation section==================================
+    Route::get('admin/exam/list', [ExamController::class, 'list']);
+    Route::get('admin/exam/add', [ExamController::class, 'add_view']);
+    Route::post('admin/exam/insert', [ExamController::class, 'insert']);
+    Route::get('admin/exam/edit/{id}', [ExamController::class, 'edit']);
+    Route::post(' admin/exam/updte/{id}', [ExamController::class, 'update']);
+    Route::get('admin/exam/delete/{id}', [ExamController::class, 'delete']);
+    Route::get('admin/exam_schedule', [ExamController::class, 'examSchedule']);
+    Route::post('admin/examinationa/exam_schedule_insert', [ExamController::class, 'examScheduleInsert']);
+
+
+
+});//end admin middleware
 
 //============================Student dashboard==================================
 Route::group(['middleware' => 'student'], function () {
@@ -138,6 +151,7 @@ Route::group(['middleware' => 'teacher'], function () {
     Route::post('teacher/account/update', [UserController::class, 'Teacher_Account_Update']);
     Route::get('teacher/class_subject', [AssignClassToTeacherController::class, 'mysubjectClass'])->name('teacher.class_subject');
     Route::get('teacher/mystudent', [StudentController::class, 'mystudent'])->name('teacher.mystudent');
+    Route::get('teacher/my_class_timetable/{class_id}/{subject_id}', [ClassTimeTableController::class, 'MyTimetableTeacher']);
 });
 
 //======================================Parent dashboard======================
@@ -149,6 +163,8 @@ Route::group(['middleware' => 'parent'], function () {
     Route::post('parent/account/update', [UserController::class, 'parent_account_update']);
     Route::get('parent/my_student_parent', [UserController::class, 'my_student_parent'])->name('parent.my_student_parent');
     Route::get('parent/my_student/subject/{student_id}', [SubjectController::class, 'parent_student_subject']);
+    Route::get('parent/my_student/timetable/{class_id}/{subject_id}/{student_id}', [ClassTimeTableController::class, 'parentStudentTimetable']);
+
 });
 
 // ===========================Start Reset Password========================
@@ -164,5 +180,8 @@ Route::post('student/update_password', [UserController::class, 'studentPasswordU
 
 
 //======================assign TimeTable=============================
-Route::get('admin/class_timetable/list',[ClassTimeTableController::class, 'list']);
+Route::get('admin/class_timetable/list', [ClassTimeTableController::class, 'list']);
 Route::post('admin/class_timetable/get_subject', [ClassTimeTableController::class, 'get_subject']);
+Route::post('admin/class_timetable/add', [ClassTimeTableController::class, 'insert_update']);
+Route::get('student/my_timetable', [ClassTimeTableController::class, 'studentMyTimetable'])->name('student.my_timetable');
+

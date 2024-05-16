@@ -32,19 +32,21 @@
 
                     <form class="row g-3" action="{{ route('admin.student.search') }}" method="GET">
                         <div class="col-auto">
-                            <label for="inputPassword2" >First Name</label>
-                            <input type="text" name="name" class="form-control" value="{{ Request::get('name') }}"  id="inputPassword2" placeholder="">
+                            <label for="inputPassword2">First Name</label>
+                            <input type="text" name="name" class="form-control" value="{{ Request::get('name') }}"
+                                id="inputPassword2" placeholder="">
                         </div>
                         <div class="col-auto">
-                          <label for="inputPassword2" >Last Name</label>
-                          <input type="text" name="last_name" class="form-control" value="{{ Request::get('Last_name') }}" id="inputPassword2" placeholder="">
+                            <label for="inputPassword2">Last Name</label>
+                            <input type="text" name="last_name" class="form-control"
+                                value="{{ Request::get('Last_name') }}" id="inputPassword2" placeholder="">
                         </div>
                         <div class="col-auto ">
 
-                          <button type="submit" class="btn btn-primary mt-4">Search</button>
-                          <a href="{{ route('admin.student.list') }}" class="btn btn-danger mt-4">Reste</a>
+                            <button type="submit" class="btn btn-primary mt-4">Search</button>
+                            <a href="{{ route('admin.student.list') }}" class="btn btn-danger mt-4">Reste</a>
                         </div>
-                      </form>
+                    </form>
                 </div>
 
 
@@ -80,7 +82,7 @@
                                             <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
                                                 colspan="1" aria-label="Browser: activate to sort column ascending">
                                                 Last Name</th>
-                                                <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
+                                            <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
                                                 colspan="1" aria-label="Platform(s): activate to sort column ascending">
                                                 Parent First Nam
                                             </th>
@@ -97,16 +99,19 @@
                                                 class Name
                                             </th>
                                             <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
-                                                colspan="1" aria-label="Platform(s): activate to sort column ascending">
+                                                colspan="1"
+                                                aria-label="Platform(s): activate to sort column ascending">
                                                 Mobile
                                                 Number
                                             </th>
                                             <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
-                                                colspan="1" aria-label="Platform(s): activate to sort column ascending">
+                                                colspan="1"
+                                                aria-label="Platform(s): activate to sort column ascending">
                                                 Gender
                                             </th>
                                             <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1"
-                                                colspan="1" aria-label="Platform(s): activate to sort column ascending">
+                                                colspan="1"
+                                                aria-label="Platform(s): activate to sort column ascending">
                                                 Date of
                                                 Brith
                                             </th>
@@ -156,17 +161,25 @@
                                                 <td>{{ $loop->iteration }}</td>
                                                 <td>
                                                     <img style="width: 70px; border-radius:40px"
-                                                        src="{{ asset('public/images/students/' . $student->profile_pic) }}"
+                                                        src="{{ url('public/images/students/' . $student->profile_pic) }}"
                                                         alt="#">
-                                                    </td>
+                                                </td>
                                                 <td>{{ $student->name }}</td>
                                                 <td>{{ $student->last_name }}</td>
-                                                                                           <td>{{ $student->parent_name }}</td>
+                                                <td>{{ $student->parent_name }}</td>
                                                 <td>{{ $student->parent_last_name }}</td>
                                                 <td>{{ $student->email }}</td>
                                                 <td>{{ $student->class_name }}</td>
                                                 <td>{{ $student->mobile_number }}</td>
-                                                <td>{{ $student->gender }}</td>
+                                                <td>
+                                                    @if ($student->gender == 0)
+
+                                                        Male
+                                                    @else
+                                                        Female
+                                                       
+                                                    @endif
+                                                </td>
                                                 <td style="min-width: 120px;">{{ $student->date_of_brith }}</td>
                                                 <td>{{ $student->caste }}</td>
 

@@ -20,6 +20,10 @@ class SubjectModel extends Model
 
         return $return;
     }
+    static public function getSingleRecord($id)
+    {
+        return self::where('id', $id)->first();
+    }
 
     static public function getSubject()
     {

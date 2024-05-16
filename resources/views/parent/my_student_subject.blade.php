@@ -3,14 +3,12 @@
 @section('title')
 @endsection
 @section('maintopic')
-<div class="d-flex justify-content-center text-blue">
-    {{ $header_title }}
-</div>
+    <div class="d-flex justify-content-center text-blue">
+        {{ $header_title }}
+    </div>
 @endsection
 
 @section('homepage')
-
-
 @endsection
 
 @section('secondpage')
@@ -22,18 +20,15 @@
 
             <div class="card">
                 <div class="card-header d-flex justify-content-center ">
-<div class="col d-flex justify-content-center ">
 
 
-
-    <img    style="width: 100px; height:100px;"  src="{{ asset('public/images/students/'.$getUser->profile_pic) }}" alt="">
-    <div  class="mt-4" style="color:blue; font-size:25px;">
-        {{ $getUser->name }}  {{ $getUser->last_name }}
-    </div>
-
-</div>
-
-
+                    <div class="col d-flex justify-content-center ">
+                        <img style="width: 100px; height:100px;"
+                            src="{{ asset('public/images/students/' . $getUser->profile_pic) }}" alt="">
+                        <div class="mt-4" style="color:blue; font-size:25px;">
+                            {{ $getUser->name }} {{ $getUser->last_name }}
+                        </div>
+                    </div>
                 </div>
                 <!-- Table with stripped rows -->
                 <div class="datatable-wrapper datatable-loading no-footer sortable searchable fixed-columns">
@@ -49,8 +44,10 @@
                                             class="datatable-sorter">Name</button></th>
                                     <th data-sortable="true" style="width: 13.320939334637966%;"><button
                                             class="datatable-sorter">Subject Type</button></th>
-                                            <th data-sortable="true" style="width: 13.320939334637966%;"><button
-                                                class="datatable-sorter">Class name</button></th>
+                                    <th data-sortable="true" style="width: 13.320939334637966%;"><button
+                                            class="datatable-sorter">Class name</button></th>
+                                    <th data-sortable="true" style="width: 13.320939334637966%;"><button
+                                            class="datatable-sorter">Aaction</button></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -66,7 +63,10 @@
                                             @endif
                                         </td>
                                         <td>{{ $sub->class_name }}</td>
-
+                                        <td>
+                                            <a href="{{ url('parent/my_student/timetable/' . $sub->class_id . '/' . $sub->subject_id . '/' . $getUser->id) }}"
+                                                class="btn btn-primary">Timetable</a>
+                                        </td>
 
 
                                     </tr>

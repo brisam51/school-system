@@ -3,7 +3,7 @@
 @section('title')
 @endsection
 @section('maintopic')
-   
+
 @endsection
 
 @section('homepage')

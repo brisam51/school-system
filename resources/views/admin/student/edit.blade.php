@@ -108,9 +108,11 @@
                             <div class="col-sm-10">
                                 <select name="gender" id="gender" class="form-control" required>
                                     <option value="">select Gender</option>
-                                    <option {{ old('gender', $getstudent->gender) == 0 ? 'selected' : '' }} value="0">Male
+                                    <option {{ old('gender', $getstudent->gender) == 0 ? 'selected' : '' }} value="0">
+                                        Male
                                     </option>
-                                    <option {{ old('gender', $getstudent->gender) == 1 ? 'selected' : '' }} value="1">
+                                    <option {{ old('gender', $getstudent->gender) == 1 ? 'selected' : '' }}
+                                        value="1">
                                         Female</option>
                                     <option value="3">other</option>
                                 </select>
@@ -207,9 +209,11 @@
                             <div class="col-sm-10">
                                 <select name="status" id="status" class="form-control" required>
                                     <option value="">select Status</option>
-                                    <option {{ old('status', $getstudent->status) == 0 ? 'selected' : '' }} value="0">
+                                    <option {{ old('status', $getstudent->status) == 0 ? 'selected' : '' }}
+                                        value="0">
                                         Activ</option>
-                                    <option {{ old('status', $getstudent->status) == 1 ? 'selected' : '' }} value="1">
+                                    <option {{ old('status', $getstudent->status) == 1 ? 'selected' : '' }}
+                                        value="1">
                                         Inactive</option>
 
                                 </select>
@@ -245,12 +249,13 @@
                                 <input type="file" name="profile_pic" class="form-control" id="profile_pic">
                             </div>
 
-{{-- profile_pic --}}
+                            {{-- profile_pic --}}
 
                         </div>
 
                         <div>
-                            <img  style="width: 70px; border-radius:40px;" src="{{ asset('public/images/students/'. $getstudent->profile_pic) }}" alt="#">
+                            <img style="width: 70px; border-radius:40px;"
+                                src="{{ asset('public/images/students/' . $getstudent->profile_pic) }}" alt="#">
                         </div>
                     </div>
 

@@ -29,23 +29,26 @@
                         <tr role="row">
                             <th class="sorting_asc" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                                 aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending"
-                                style="width: 100.453px;">#</th>
+                                style="width:50.453px;">#</th>
 
                             <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                                aria-label="Platform(s): activate to sort column ascending" style="width: 211.078px;">
+                                aria-label="Platform(s): activate to sort column ascending" style="width: 100.078px;">
                                 Class Name</th>
                             <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                                 aria-label="Engine version: activate to sort column ascending" style="width: 156.875px;">
                                 Subject Name</th>
                             <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                                aria-label="Engine version: activate to sort column ascending" style="width: 156.875px;">
+                                aria-label="Engine version: activate to sort column ascending" style="width: 50.875px;">
                                 Subject Type</th>
+                            <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
+                                aria-label="CSS grade: activate to sort column ascending" style="width: 160.391px;">
+                                My Class Timetable</th>
                             <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
                                 aria-label="CSS grade: activate to sort column ascending" style="width: 110.391px;">
                                 Created At</th>
                             <th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-                                aria-label="CSS grade: activate to sort column ascending" style="width: 110.391px;">
-                                Actin</th>
+                                aria-label="CSS grade: activate to sort column ascending" style="width: 60.391px;">
+                                Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -63,7 +66,21 @@
 
                                 </td>
                                 <td>
+                                    @php
+                                        $getClassSubject = $value->getMyTimetable($value->class_id, $value->subject_id);
+                                    @endphp
+                                    @if (!empty($getClassSubject))
+                                        {{ $getClassSubject->start_time }}  To  {{ $getClassSubject->end_time }}
+                                        <br/>
+                                        Room Number:  {{ $getClassSubject->room_number }}
+                                    @endif
+                                </td>
+                                <td>
                                     {{ date('Y-m-d', strtotime($value->created_at)) }}
+                                </td>
+                                <td>
+                                    <a href="{{ url('teacher/my_class_timetable/' . $value->class_id . '/' . $value->subject_id) }}"
+                                        class="btn btn-primary">Timetable</a>
                                 </td>
                             </tr>
                         @endforeach

@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\WeekModel;
+use App\Models\ClassSubjectTimetableModel;
 use Request;
 
 class AssigenClassTeacherModel extends Model
@@ -86,7 +88,8 @@ class AssigenClassTeacherModel extends Model
 
     //get my class subject teacher side
     static public function getMyClassSubject($teacher_id){
-       return self::select('assigen_class_teacher.*','class.name as class_name','subject.name as subject_name','subject.type as subject_type')
+       return self::select('assigen_class_teacher.*','class.name as class_name',
+       'subject.name as subject_name','subject.type as subject_type','class.id as class_id','subject.id as subject_id' )
         ->join('class','class.id','=','assigen_class_teacher.class_id')
         ->join('class_subject','class_subject.class_id','=','class.id')
         ->join('subject','subject.id','=','class_subject.subject_id')
@@ -95,5 +98,11 @@ class AssigenClassTeacherModel extends Model
         ->get();
 
 
+    }
+
+    static public function getMyTimetable($class_id,$subject_id){
+        $getWeek = WeekModel::getWeekUsingName(date('l'));
+        return ClassSubjectTimetableModel::getall($class_id, $subject_id,$getWeek->id,);
+       
     }
 }//class end
