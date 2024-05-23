@@ -24,16 +24,15 @@
                         <form action="" method="get">
                             @csrf
                             <div class="d-flex flex-row">
-
                                 <div class="form-group m-2" style="width: 200px; ">
                                     <label for="">Class </label>
-                                    <select name="class_id" id="" class="form-control" required>
+                                    <select name="class_id"   class="form-control" required>
                                         <option value=""> Select </option>
                                         @foreach ($getClassRecord as $class)
-                                            <option {{ Request::get('class_id') == $class->id ? 'selected' : '' }}
+                                            <option @if (Request::get('class_id') == $class->id) selected @endif
                                                 value="{{ $class->id }}">{{ $class->name }}</option>
                                         @endforeach
-                                        <option value=""></option>
+                                        
                                     </select>
                                 </div>
                                 <div class="form-group m-2" style="width: 200px; ">
@@ -41,7 +40,7 @@
                                     <select name="exam_id" id="" class="form-control" required>
                                         <option value=""> Select</option>
                                         @foreach ($getExamRecord as $exam)
-                                            <option {{ Request::get('exam_id') == $exam->id ? 'selected' : '' }}
+                                            <option @if (Request::get('exam_id') == $exam->id) selected @endif
                                                 value="{{ $exam->id }}">{{ $exam->name }}</option>
                                         @endforeach
                                     </select>
@@ -57,11 +56,7 @@
 
                     </div>
 
-                    <div class="col">
-                        <div style="text-align: right">
-                            <a href="{{ url('admin/exam/add') }}" class="btn btn-primary">Add new Exam</a>
-                        </div>
-                    </div>
+
                 </div>
 
                 <div class="card mt-4 ">
@@ -108,30 +103,37 @@
                                                 <td>{{ $loop->iteration }}</td>
                                                 <td>{{ $value['subject_name'] }}
                                                     <input type="hidden" class="form-control"
-                                                        name="schedule[{{ $i }}][subject_id]"  value="{{ $value['subject_id'] }}">
+                                                        name="schedule[{{ $i }}][subject_id]"
+                                                        value="{{ $value['subject_id'] }}">
                                                 </td>
                                                 <td>
-                                                    <input type="date" class="form-control" value="{{ $value['exam_date']  }}"
+                                                    <input type="date" class="form-control"
+                                                        value="{{ $value['exam_date'] }}"
                                                         name="schedule[{{ $i }}][exam_date]">
                                                 </td>
                                                 <td>
-                                                    <input type="time" class="form-control" value="{{ $value['start_time']  }}"
+                                                    <input type="time" class="form-control"
+                                                        value="{{ $value['start_time'] }}"
                                                         name="schedule[{{ $i }}][start_time]">
                                                 </td>
                                                 <td>
-                                                    <input type="time" class="form-control" value="{{ $value['end_time']  }}"
+                                                    <input type="time" class="form-control"
+                                                        value="{{ $value['end_time'] }}"
                                                         name="schedule[{{ $i }}][end_time]">
                                                 </td>
                                                 <td>
-                                                    <input type="text" class="form-control" value="{{ $value['room_number']  }}"
+                                                    <input type="text" class="form-control"
+                                                        value="{{ $value['room_number'] }}"
                                                         name="schedule[{{ $i }}][room_number]">
                                                 </td>
                                                 <td>
-                                                    <input type="text" class="form-control" value="{{ $value['full_marks']  }}"
+                                                    <input type="text" class="form-control"
+                                                        value="{{ $value['full_marks'] }}"
                                                         name="schedule[{{ $i }}][full_marks]">
                                                 </td>
                                                 <td>
-                                                    <input type="text" class="form-control" value="{{ $value['passing_mark']  }}"
+                                                    <input type="text" class="form-control"
+                                                        value="{{ $value['passing_mark'] }}"
                                                         name="schedule[{{ $i }}][passing_mark]">
                                                 </td>
                                             </tr>

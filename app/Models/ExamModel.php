@@ -24,9 +24,9 @@ class ExamModel extends Model
             $result = $result->where('exams.name', 'like', '%' . Request::get('name') . '%');
         }
         if (!empty(Request::get('exam_date'))) {
-            $result = $result->where('exams.name', 'like', '%' . Request::get('exam_date') . '%');
+            $result = $result->whereDate('exams.exam_date', '=',  Request::get('exam_date') );
         }
-        $result = $result->paginate(10);
+        $result = $result->paginate(5);
         return $result;
     }
     static public function getExamRecord()

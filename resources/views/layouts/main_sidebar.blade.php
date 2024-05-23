@@ -70,17 +70,17 @@
                     data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
                     <i class="bi bi-journal-text"></i><span>Examanition</span><i class="bi bi-chevron-down ms-auto"></i>
                 </a>
-                <ul id="forms-nav" class="nav-content collapse @if (Request::segment(2) == 'exam'||Request::segment(2) == 'exam_schedule') show @endif"
+                <ul id="forms-nav" class="nav-content collapse @if (Request::segment(2) == 'exam' || Request::segment(2) == 'exam_schedule') show @endif"
                     data-bs-parent="#sidebar-nav">
                     <li>
                         <a href="{{ url('admin/exam/list') }}"
-                            class="@if (Request::segment(2) == 'exam') text-white @endif">
-                            <i class="bi bi-circle"></i><span>Exam</span>
+                            class="@if (Request::segment(2) == 'exam') text-white border border-warning rounded @endif">
+                            <i  class="bi bi-circle"></i><span>Exam</span>
                         </a>
                     </li>
                     <li>
                         <a href="{{ url('admin/exam_schedule') }}"
-                            class="@if (Request::segment(2) == 'exam_schedule') text-white @endif">
+                            class="@if (Request::segment(2) == 'exam_schedule') text-white border border-warning @endif">
                             <i class="bi bi-circle"></i><span>Exam Schdule</span>
                         </a>
                     </li>
@@ -101,7 +101,8 @@
                         Request::segment(2) == 'subject' ||
                         Request::segment(2) == 'assign-subject' ||
                         Request::segment(3) == 'assigen_class_teacher' ||
-                        Request::segment(2) == 'class_timetable') show @endif "
+                        Request::segment(2) == 'class_timetable' ||
+                        Request::segment(2) == ' my_exam_timetable') show @endif "
                     data-bs-parent="#sidebar-nav" style="">
                     <li>
                         <a href="{{ url('admin/class/list') }} "
@@ -171,7 +172,14 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link {{ Route::is('student.account') ? 'text-white bg-primary rounded' : '' }} "
+                <a class="nav-link  {{ url(Request::segment(2) == 'my_exam_timetable') ? 'text-white bg-primary rounded' : '' }}"
+                    href="{{ url('student/my_exam_timetable') }}">
+                    <i class="bi bi-grid"></i>
+                    <span>My Exam Timetable</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link {{ url(Request::segment(2) == 'account') ? 'text-white bg-primary rounded' : '' }} "
                     href="{{ url('student/account') }}">
                     <i class="bi bi-grid"></i>
                     <span>My Account</span>
@@ -202,7 +210,8 @@
                     <i class="bi bi-grid"></i>
                     <span>My student</span>
                 </a>
-            </li><!-- End Dashboard Nav -->
+            </li>
+
 
             <li class="nav-item">
                 <a class="nav-link @if (Request::segment(2) == 'account') bg-primary text-white @endif "
@@ -216,6 +225,13 @@
                     href="{{ url('teacher/class_subject') }}">
                     <i class="bi bi-grid"></i>
                     <span>My Class & Subject</span>
+                </a>
+            </li>
+             <li class="nav-item">
+                <a class="nav-link @if (Request::segment(2) == 'my_exam_timetable') bg-primary text-white @endif"
+                    href="{{ url('teacher/my_exam_timetable') }}">
+                    <i class="bi bi-grid"></i>
+                    <span>My Exam Timetable</span>
                 </a>
             </li>
             <li class="nav-item  ">
@@ -244,12 +260,14 @@
                     <span>My Student</span>
                 </a>
             </li>
+
             <li class="nav-item">
                 <a class="nav-link  " href="{{ url('parent/account') }}">
                     <i class="bi bi-grid"></i>
                     <span>My Account</span>
                 </a>
             </li>
+
             <li class="nav-item">
                 <div>
                     <a class="nav-link" href="{{ url('teacher/change_password') }}">

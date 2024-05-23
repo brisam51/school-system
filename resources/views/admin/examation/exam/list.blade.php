@@ -36,11 +36,12 @@
                                 </div>
                                 <div class="form-group m-2  pt-4" style="width: 200px;">
 
-                                    <button class="btn btn-primary " type="submit">
-                                        <label for=""><i class="fa fa-search" aria-hidden="true">Search</i></label>
-                                    </button>
-                                    <a href="{{ url('admin/exam/list') }}" class="btn btn-success">Rest</a>
-
+                                        <button class="btn btn-primary " type="submit">
+                                            <label for=""><i class="fa fa-search"
+                                                    aria-hidden="true">Search</i></label>
+                                        </button>
+                                        <a href="{{ url('admin/exam/list') }}" class="btn btn-success">Rest</a>
+                                
 
                                 </div>
 
@@ -51,23 +52,16 @@
                     </div>
 
                     <div class="col">
-
                         <div style="text-align: right">
                             <a href="{{ url('admin/exam/add') }}" class="btn btn-primary">Add new Exam</a>
                         </div>
                     </div>
 
 
-
                 </div>
                 <div class="card mt-4 ">
-
-                    <div class="card-header ">
-<div class="row">
-    <div class="col d-flex justify-contnent-end">total itemes: {{ $getRecords->total() }}</div>
-    <div class="col d-flex justify-contnent-start"> <h2>{{ $header_title }} </h2></div>
-</div>
-
+                    <div class="card-header d-flex justify-content-center text-dark">
+                        <h2>Exam List</h2>
                     </div>
                     <!-- Table with stripped rows -->
                     <div class="datatable-wrapper datatable-loading no-footer sortable searchable fixed-columns">
@@ -94,7 +88,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($getRecords as $exam)
+                                    @foreach ($Records as $exam)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
                                             <td>{{ $exam->name }}</td>
@@ -118,9 +112,12 @@
                             </table>
                         </div>
                         <div class="datatable-bottom">
+                            {{-- <div class="datatable-info"> {{ $subject->onEachSide(1)->links() }}</div> --}}
+                            <nav class="datatable-pagination">
+                                <ul class="datatable-pagination-list">
 
-                            {!! $getRecords->appends(Illuminate\Support\Facades\Request::except('page'))->links() !!}
-                            
+                                </ul>
+                            </nav>
                         </div>
                     </div>
                     <!-- End Table with stripped rows -->

@@ -63,6 +63,8 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('admin/teacher/delete/{id}', [TeacherController::class, 'Delete'])->name('admin.teacher.delete');
     Route::get('admin/teacher/search', [TeacherController::class, 'Search'])->name('admin.teacher.search');
 
+
+
     //==========================Parent Routes================
     Route::get('admin/Parent/list', [ParentController::class, 'List'])->name('admin.parent.list');
     Route::get('admin/parent/add', [ParentController::class, 'Add'])->name('admin.parent.add');
@@ -140,6 +142,7 @@ Route::group(['middleware' => 'student'], function () {
     Route::get('student/account', [UserController::class, 'my_account_student_view'])->name('student.account');
     Route::post('student/account/update', [UserController::class, 'Student_Account_Update']);
     Route::get('student/my_subject', [SubjectController::class, 'Mysubject'])->name('student.my_subject');
+    Route::get('student/my_exam_timetable', [ExamController::class, 'myExamTimeTable']);
 
 });
 //===================================Teacher dashboard===========================
@@ -152,6 +155,7 @@ Route::group(['middleware' => 'teacher'], function () {
     Route::get('teacher/class_subject', [AssignClassToTeacherController::class, 'mysubjectClass'])->name('teacher.class_subject');
     Route::get('teacher/mystudent', [StudentController::class, 'mystudent'])->name('teacher.mystudent');
     Route::get('teacher/my_class_timetable/{class_id}/{subject_id}', [ClassTimeTableController::class, 'MyTimetableTeacher']);
+    Route::get('teacher/my_exam_timetable', [ExamController::class, 'myExamTimeTableTeacher']);
 });
 
 //======================================Parent dashboard======================

@@ -124,22 +124,23 @@
                                             Edit</a>
                                         <a href="{{ route('EditView_single', $record->id) }}" class="btn btn-success">
                                             Edit Singel</a>
-                                        <a href="{{ route('DeleteAssign', $record->id) }}" class="btn btn-danger">Delete</a>
+                                        <a href="{{ route('DeleteAssign', $record->id) }}"
+                                            class="btn btn-danger">Delete</a>
                                     </td>
 
                                 </tr>
                             @endforeach
                         </tbody>
                     </table>
+                    <div class="datatable-bottom">
 
+                        {!! $getRecord->appends(Illuminate\Support\Facades\Request::except('page'))->links() !!}
+
+                    </div>
                 </div>
                 <div class="datatable-bottom">
-                    {{ $getRecord->links() }}
-                    <nav class="datatable-pagination">
-                        <ul class="datatable-pagination-list">
 
-                        </ul>
-                    </nav>
+
                 </div>
 
                 <!-- End Table with stripped rows -->
