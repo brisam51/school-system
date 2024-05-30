@@ -32,7 +32,7 @@
                                             <option @if (Request::get('class_id') == $class->id) selected @endif
                                                 value="{{ $class->id }}">{{ $class->name }}</option>
                                         @endforeach
-                                        
+
                                     </select>
                                 </div>
                                 <div class="form-group m-2" style="width: 200px; ">
@@ -66,10 +66,12 @@
                     <form action="{{ url('admin/examinationa/exam_schedule_insert') }}" method="POST">
 
                         @csrf
+                        {{-- start  --}}
                         <div class="row">
                             <input type="hidden" name="class_id" value="{{ Request::get('class_id') }}">
                             <input type="hidden" name="exam_id" value="{{ Request::get('exam_id') }}">
                         </div>
+                        {{-- End --}}
                         <div class="datatable-wrapper datatable-loading no-footer sortable searchable fixed-columns">
 
                             <div class="datatable-container">
@@ -144,7 +146,13 @@
 
                                     </tbody>
                                 </table>
+                                <div class="datatable-bottom">
+
+                            {{-- {!! $result->appends(Illuminate\Support\Facades\Request::except('page'))->links() !!} --}}
+
+                        </div>
                             </div>
+
                         </div>
                         <div style="text-align: center; padding:20px;">
                             <button class="btn btn-primary" type="submit">Submit</button>

@@ -75,7 +75,7 @@
                     <li>
                         <a href="{{ url('admin/exam/list') }}"
                             class="@if (Request::segment(2) == 'exam') text-white border border-warning rounded @endif">
-                            <i  class="bi bi-circle"></i><span>Exam</span>
+                            <i class="bi bi-circle"></i><span>Exam</span>
                         </a>
                     </li>
                     <li>
@@ -172,22 +172,25 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link  {{ url(Request::segment(2) == 'my_exam_timetable') ? 'text-white bg-primary rounded' : '' }}"
+                <a class="nav-link @if (Request::segment(2) == 'my_exam_timetable') text-white bg-primary rounded @endif"
                     href="{{ url('student/my_exam_timetable') }}">
                     <i class="bi bi-grid"></i>
                     <span>My Exam Timetable</span>
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link {{ url(Request::segment(2) == 'account') ? 'text-white bg-primary rounded' : '' }} "
+                <a class="nav-link @if (Request::segment(2) == 'account') text-white bg-primary rounded @endif"
                     href="{{ url('student/account') }}">
                     <i class="bi bi-grid"></i>
-                    <span>My Account</span>
+                    <span>My account</span>
                 </a>
             </li>
+
+
             <li class="nav-item  ">
                 <div>
-                    <a class="nav-link" href="{{ url('student/change_password') }}">
+                    <a class="nav-link @if (Request::segment(2) == 'change_password') text-white bg-primary rounded @endif"
+                        href="{{ url('student/change_password') }}">
                         <i class="bi bi-tag"></i>
                         <span>Change Password</span>
 
@@ -227,7 +230,7 @@
                     <span>My Class & Subject</span>
                 </a>
             </li>
-             <li class="nav-item">
+            <li class="nav-item">
                 <a class="nav-link @if (Request::segment(2) == 'my_exam_timetable') bg-primary text-white @endif"
                     href="{{ url('teacher/my_exam_timetable') }}">
                     <i class="bi bi-grid"></i>

@@ -15,8 +15,21 @@
     <div style="background-color:#2f5; padding:5px; overflow-y: scroll; ">
 
         <div class="card">
-            <div class="card-header d-flex justify-content-center">
-                <h3>Exam List</h3>
+            <div class="card-header ">
+                <div class="row">
+                    <div class="col d-flex justify-content-start">
+                        <img style="width: 100px; border-radius:40px"
+                        src="{{ asset('public/images/students/' . $stusent_info->profile_pic) }}" alt="#">
+
+                       {{$stusent_info->name  }}
+                 
+                    </div>
+                    <div class="col">{{ $header_title }}</div>
+
+
+
+                </div>
+
             </div>
             <!-- /.card-header -->
             <div class="card-body">

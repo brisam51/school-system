@@ -25,22 +25,18 @@
             {{ $header_title }}
         </div>
         <div class="card-body">
-
-
         </div>
         <div class="card overflow-auto ">
-            <div class="crard-header">hedear</div>
             <div class="cord-body">
                 @foreach ($getRecord as $value)
-                    <h2>{{ $value['class_name'] }}</h2>
-                    @foreach ($value['exam'] as $exam)
-                        <div class="card ">
-                            <div class="card-header ">
-                                <div class="card-title">
-                                    {{ $exam['exam_name'] }}
-                                </div>
+                    <div class="card ">
+                        <div class="card-header ">
+                            <div class="card-title">
+                                <h3>{{ $value['class_name'] }}</h3>
                             </div>
-                            <div class="card-body">
+                        </div>
+                        <div class="card-body">
+                            @foreach ($value['exam'] as $exam)
                                 <table id="example1" class="table table-bordered table-striped dataTable" role="grid"
                                     aria-describedby="example1_info">
                                     <thead>
@@ -56,20 +52,35 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-
+                                        @foreach ($exam['subject'] as $valueS)
+                                            <tr>
+                                                <td>{{ $valueS['subject_name'] }}</td>
+                                                <td>{{ date('l', strtotime($valueS['exam_date'])) }}</td>
+                                                <td>{{ $valueS['exam_date'] }}</td>
+                                                <td>{{ date('h:i A', strtotime($valueS['start_time'])) }}</td>
+                                                <td>{{ date('h:i A', strtotime($valueS['end_time'])) }}</td>
+                                                <td>{{ $valueS['room_number'] }}</td>
+                                                <td>{{ $valueS['full_marks'] }}</td>
+                                                <td>{{ $valueS['passing_mark'] }}</td>
+                                            </tr>
+                                        @endforeach
 
                                     </tbody>
                                 </table>
-                    @endforeach
+                            @endforeach
+
+
+
+                        </div>
+                    </div>
                 @endforeach
+
+
             </div>
+
+
+            {{-- end card body --}}
         </div>
-
-    </div>
-
-
-    {{-- end card body --}}
-    </div>
 
 
     </div>

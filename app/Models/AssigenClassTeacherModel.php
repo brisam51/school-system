@@ -117,11 +117,11 @@ class AssigenClassTeacherModel extends Model
     //for get information to lunch exam time table of teacher side
     static public function getMyClassSubjectGroup($teacher_id)
     {
-        return AssigenClassTeacherModel::select('assigen_class_teacher.*', 'class.name as class_name', 'class.id as class_id')
+        return AssigenClassTeacherModel::
+            select('assigen_class_teacher.*', 'class.name as class_name', 'class.id as class_id')
             ->join('class', 'class.id', '=', 'assigen_class_teacher.class_id')
+                        ->where('assigen_class_teacher.status', '=', 0)
             ->where('assigen_class_teacher.status', '=', 0)
-            ->where('assigen_class_teacher.status', '=', 0)
-
             ->where('assigen_class_teacher.teacher_id', '=', $teacher_id)
             ->groupBy('assigen_class_teacher.class_id')
             ->get();

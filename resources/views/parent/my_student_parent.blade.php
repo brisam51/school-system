@@ -79,6 +79,8 @@
                                 <td>
                                     <a href="{{ url('parent/my_student/subject', $value->id) }}"
                                         class="btn btn-primary btn-sm">subjects</a>
+                                         <a href="{{ url('parent/my_student/exam_timetable', $value->id) }}"
+                                        class="btn btn-success btn-sm">Exam Timetable</a>
                                 </td>
                             </tr>
                         @endforeach

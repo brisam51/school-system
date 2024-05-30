@@ -26,23 +26,23 @@ class ExamScheduleModel extends Model
     static public function getExam($class_id)
     {
         return ExamScheduleModel::select('examschedule.*', 'exams.name as exam_name')
-            ->join('exams', 'exams.id', '=', 'examschedule.id')
+            ->join('exams', 'exams.id', '=', 'examschedule.exam_id')
             ->where('examschedule.class_id', '=', $class_id)
-            ->groupBy('exams.id')
-            ->orderBy('examschedule.id', 'desc')
+            ->groupBy('examschedule.exam_id')
+            ->orderBy('examschedule.id','desc')
             ->get();
 
     }
 
-
-    static public function examTimeTable($exam_id, $class_id)
+    static public function getExamTimeTable($exam_id, $class_id)
     {
-
-        return self::select('examschedule.*', 'subject.name as subject_name', 'subject.type as subject_type')
-            ->join('subject', 'subject.id', '=', 'examschedule.subject_id')
-            ->where('examschedule.class_id', '=', $class_id)
+        return ExamScheduleModel::select('examschedule.*' ,'subject.name as subject_name','subject.type as subject_type')
+            ->join('subject', 'subject.id', 'examschedule.subject_id')
             ->where('examschedule.exam_id', '=', $exam_id)
-
+            ->where('examschedule.class_id', '=', $class_id)
             ->get();
+
     }
+
+
 }//end class
